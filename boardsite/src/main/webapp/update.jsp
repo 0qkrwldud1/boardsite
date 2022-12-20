@@ -85,13 +85,13 @@ if (list == null || list.size() == 0) {
 		
 	</div>	
 	
-	<input class = "up_btn" type="submit" value="수정하기"/>
+	<input class = "up_btn" type="submit" value="Update"/>
 	</form>
 	
 	<br><hr><br>
 	<div class = "btn_area">
-	<button class = "btn" onclick="histroy.back()">뒤로가기</button>
-	<button class = "btn" onclick="location.href='list.do'">목록으로</button>
+	<button class = "btn" onclick="histroy.back()">Back</button>
+	<button class = "btn" onclick="location.href='list.do'">Borad List</button>
 	</div>
 	<script>
 	function chkSubmit() {
