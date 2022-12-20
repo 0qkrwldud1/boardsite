@@ -87,4 +87,13 @@
 ## 구현한 게시판
 
 
-<img src="캡처01.png" width="400" height="200"/>
+<img src="캡처01.png" width="600" height="300"/>
+
+
+<img src="캡처02.png" width="600" height="300"/>
+
+
+<img src="캡처03.png" width="600" height="300"/>
+
+
+<img src="캡처04.png" width="600" height="300"/>
