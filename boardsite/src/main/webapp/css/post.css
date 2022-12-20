@@ -1,0 +1,167 @@
+ /*START GENERAL CSS FOR BACKEND*/
+ @import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.1.0/css/font-awesome.min.css";
+ @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&display=swap');
+
+ * {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+}
+
+body {
+  font-size: 16px;
+  background: white 70%;
+  margin: 1px 0px 0px 0px;
+  background: linear-gradient(
+    90deg,
+    rgb(254, 255, 253) 0%,
+    rgb(134, 182, 194) 50%
+    );
+  
+}
+
+table {
+	font-family: 'IBM Plex Sans KR', sans-serif;
+    width: 70%;
+    border-top: 1px solid rgb(142, 143, 145);
+    border-collapse: collapse;
+    background: #f2f2f2;
+    margin-left: 5%;
+    
+  }
+  
+.tdd:hover {
+  	background-color: #ffffff; 
+  	cursor: pointer;
+  }
+  
+th, td {
+    border-bottom: 1px solid rgb(142, 143, 145);
+    border-left: 1px solid rgb(142, 143, 145);
+    padding: 10px;
+  }
+th:first-child, td:first-child {
+    border-left: none;
+  }
+  
+ 
+h1 {
+	color: wihte;
+	text-align: center;
+	
+}
+
+.btn {
+	background-color:#599bb3;
+	border: none;
+	border-radius: 2px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family: 'IBM Plex Sans KR', sans-serif;
+	font-size:16px;
+	text-decoration:none;
+	margin-left: 5%;
+	
+}
+
+.btn:hover {
+	background-color:#408c99;
+}
+
+.container {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	margin-left: 5%;
+	
+}
+
+.con{
+	display: flex;
+	align-items: stretch;
+	margin-left: 5%;
+}
+
+.up_sub {
+	margin-left: 5%;
+	
+	
+	margin-top: 10px;
+}
+
+
+.ti_list{
+	margin-right:25px;
+}
+
+#write_main {
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+
+#list_main{
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+
+#grid_header{
+ margin: 0 auto;
+ max-width: calc(100% - 4em);
+ width: 80em;
+ padding-top: 20px;
+
+}
+#grid_header {
+ display: grid;
+}
+#grid_header a {
+ text-decoration: none;
+ color: rgb(142, 143, 145);
+}
+#grid_header ul li {
+ list-style: none;
+ padding: 0 10px;
+ float:left;
+}
+.header_top {
+ font-size: 15px;
+ padding-left: 65%;
+}
+#foot{
+ margin-top: 70PX;
+ margin-left: 40px;
+ padding-bottom: 2%;
+ padding-left: 1%;
+ color: rgb(131, 131, 131);
+}
+a:link {
+ color : rgb(131, 131, 131);
+}
+a:visited {
+ color : rgb(131, 131, 131);
+}
+a {
+	text-decoration: none;
+}
+
+.banddy{
+ font-weight: bold;
+ font-size: 60px;
+ margin-left: 45px;
+ padding: 10px;
+ color: rgb(142, 143, 145);
+}
+.a{
+  margin-top: 60px;
+}
+@media (max-width: 800px) {
+  #logo {
+    grid: none;
+  } 
+  .logo_text{
+    display: block;
+    float: right;
+  }
+  .header_top{
+    padding-left: 0px;
+  } 
+}
