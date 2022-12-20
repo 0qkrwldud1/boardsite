@@ -75,7 +75,7 @@ if (list == null || list.size() == 0) {
 	
 	</div>
 	
-	<div class = "con">
+	<div class = "view_con">
 	<strong>Content</strong><br>
 	<%=content%>
 	</div>
