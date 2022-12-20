@@ -54,11 +54,11 @@
             <div style = "text-align: center;">
             <div>
             <input type="radio" placeholder="user gender" name = "user_Gender" 
-            autocomplate = "off" value = "남자" checked/>남자
+            autocomplate = "off" value = "남자" checked/>M
             </div>
             <div>
             <input type="radio" placeholder="user gender" name = "user_Gender"
-            autocomplate = "off" value = "여자" checked/>여자
+            autocomplate = "off" value = "여자" checked/>F
             </div>
             </div>
             <input type="text" placeholder="user email" name = "user_Email"/>

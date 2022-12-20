@@ -81,16 +81,18 @@ if (list == null || list.size() == 0) {
 		</div>
 	<div class = "con">
 		
-		<textarea cols="100" rows="15" name="text"><%=content %></textarea>
+		<textarea cols="150" rows="20"  name="text"><%=content %></textarea>
 		
 	</div>	
-	<input class = "btn" type="submit" value="수정하기"/>
+	
+	<input class = "up_btn" type="submit" value="수정하기"/>
 	</form>
 	
 	<br><hr><br>
+	<div class = "btn_area">
 	<button class = "btn" onclick="histroy.back()">뒤로가기</button>
 	<button class = "btn" onclick="location.href='list.do'">목록으로</button>
-	
+	</div>
 	<script>
 	function chkSubmit() {
 		frm = document.forms['frm'];

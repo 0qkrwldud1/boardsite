@@ -66,8 +66,9 @@ List<boardDTO> list = (List<boardDTO>) request.getAttribute("list");
 	</table>
 	<br>
 	</div>
+	<div class = "btn_area">
 	<button class= "btn" onclick="location.href='write.do'">Publish</button>
-   	
+   	</div>
    	</main>	
    	
    		

@@ -76,15 +76,17 @@ if (list == null || list.size() == 0) {
 	</div>
 	
 	<div class = "view_con">
-	<strong>Content</strong><br>
 	<%=content%>
 	</div>
+	
+	
 	<br><hr><br>
+	<div class = "btn_area">
 	<button class = "btn" type="button" onclick="chkDelete(<%=num%>)">Delete</button>
 	<button class = "btn" type="button" onclick="location.href='list.do'">Board List</button>
 	<button class = "btn" type="button" onclick="location.href='update.do?num=<%=num%>'">Update</button>
 	<button class = "btn" type="button" onclick="location.href='write.do'">New Post</button>
-    
+    </div>
     <script>
     function chkDelete(num) {
     	let r = confirm("삭제하시겠습니까?");

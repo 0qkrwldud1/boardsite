@@ -24,7 +24,7 @@ table {
     border-top: 1px solid rgb(142, 143, 145);
     border-collapse: collapse;
     background: #f2f2f2;
-    margin-left: 5%;
+    margin-left: 15%;
     
   }
   
@@ -59,7 +59,7 @@ h1 {
 	font-family: 'IBM Plex Sans KR', sans-serif;
 	font-size:16px;
 	text-decoration:none;
-	margin-left: 5%;
+	margin-right:5px;
 	
 }
 
@@ -67,22 +67,45 @@ h1 {
 	background-color:#408c99;
 }
 
+.btn_area {
+	margin-left: 15%;
+}
+
+.up_btn {
+	background-color:#599bb3;
+	border: none;
+	border-radius: 2px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family: 'IBM Plex Sans KR', sans-serif;
+	font-size:16px;
+	text-decoration:none;
+	margin-top: 5px;
+	margin-left: 15%;
+}
+
 .container {
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
-	margin-left: 5%;
+	margin-left: 15%;
 	
 }
 
 .con{
 	display: flex;
 	align-items: stretch;
-	margin-left: 5%;
+	margin-left: 15%;
+	
 }
 
 .view_con {
-	margin-bottom: 20%;
+	font-size:18px;
+	margin-left:300px;
+	margin-right:300px;
+	margin-bottom:300px;
+	margin-top:80px;
 }
 
 .up_sub {
@@ -128,7 +151,7 @@ h1 {
 }
 .header_top {
  font-size: 15px;
- padding-left: 65%;
+ padding-left: 60%;
 }
 #foot{
  margin-top: 70PX;

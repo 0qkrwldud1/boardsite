@@ -52,7 +52,7 @@
 		
 		</div>
 		<hr>
-		<div class = "wir_btn">
+		<div class = "btn_area">
 			<span>
 				<input class = "btn" type="submit" value="Publish"/>
 			
