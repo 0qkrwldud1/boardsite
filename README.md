@@ -87,4 +87,4 @@
 ## 구현한 게시판
 
 
-	
+<img src="https://github.com/0qkrwldud1/boardsite/commit/4ff4f276b37296ce14f8af89d8c568c9fbfcd3f0.png" width="400" height="200"/>
