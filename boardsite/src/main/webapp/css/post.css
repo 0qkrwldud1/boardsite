@@ -100,16 +100,15 @@ h1 {
 	
 }
 
-.view_con {
-	font-size:18px;
-	display: flex;
-  	justify-content: center;
+.view_content {
+	font-size:20px;
+	
 	width: 1200px;
 	height: 500px;
 	margin-left:25%;
 	margin-bottom:50px;
 	margin-top:80px;
-	background-color: #f2f2f2;
+	background-color: #f8f8f8;
 }
 
 .up_sub {

@@ -9,5 +9,11 @@ CREATE TABLE board(
 	bd_regdate datetime DEFAULT now()
 );
 
-select* from board b
+create table user(
+	user_ID varchar(45) PRIMARY key NOT NULL ,
+	user_PW varchar(45) ,
+	user_Name varchar(45) ,
+	user_Gender varchar(45) ,
+	user_Email varchar(45) 
+);
 
