@@ -47,7 +47,7 @@
             <button>create</button>
             <p class="message">Already registered? <a href="#">Sign In</a></p>
           </form> -->
-          <form  method = "post" action = "SignUpAction.jsp" class="login-form">
+          <form  method = "post" action = "signUpAction.jsp" class="login-form">
             <input type="text" placeholder="user id" name = "user_ID"/>
             <input type="password" placeholder="password" name = "user_PW" />
             <input type="text" placeholder="user Name" name = "user_Name"/>

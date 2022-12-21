@@ -4,8 +4,8 @@ public class D {
 
 	public static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 	public static final String URL = "jdbc:mysql://localhost:3306/boardsite?characterEncoding=UTF-8";
-	public static final String USERID = "root";
-	public static final String USERPW = "p5595";
+	public static final String USERID = "myuser";
+	public static final String USERPW = "k404";
 	
 	public static final String SQL_BOADR_INSERT = 
 			"INSERT INTO board"
