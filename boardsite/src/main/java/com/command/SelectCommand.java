@@ -11,6 +11,8 @@ import com.beans.boardDTO;
 
 public class SelectCommand implements Command {
 
+	// 리스트를 불러옴. -> d에 selectbynum사용.
+	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		int num = Integer.parseInt(request.getParameter("num"));

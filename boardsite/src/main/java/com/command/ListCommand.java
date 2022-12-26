@@ -10,6 +10,8 @@ import com.beans.boardDAO;
 import com.beans.boardDTO;
 
 public class ListCommand implements Command {
+	
+	// 리스트를 만듦 -> d에 select를 사용.
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {

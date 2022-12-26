@@ -14,7 +14,7 @@ public class D {
 	
 	public static final String SQL_BOARD_SELECT =
 			"SELECT bd_num num, bd_title title, bd_content content, user_ID user_ID, "
-			+ "bd_viewcnt viewcnt, bd_regdate regdate " + "FROM board ORDER BY bd_num ASC";
+			+ "bd_viewcnt viewcnt, bd_regdate regdate " + "FROM board ORDER BY bd_num DESC ";
 	
 	
 	public static final String SQL_BOARD_SELECT_BY_NUM =
@@ -29,5 +29,9 @@ public class D {
 	
 	public static final String SQL_BOARD_DELETE = 
 			"DELETE FROM board WHERE bd_num = ?";
+	
+	// 목록 페이징 처리
+	public static final String SQL_GET_BOARD_LIST = 
+			"SELECT * FROM board ORDER BY bd_num DESC LIMIT ?,?";
 
 }

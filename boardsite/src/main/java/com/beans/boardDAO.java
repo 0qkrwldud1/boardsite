@@ -17,6 +17,7 @@ public class boardDAO {
 	PreparedStatement pstmt;
 	ResultSet rs;
 	
+	
 	public boardDAO() { 
 		try { 
 			Class.forName(D.DRIVER);
@@ -145,6 +146,7 @@ public class boardDAO {
 		return list;
 	}
 	
+	// getboardlist랑 바꾸기 
 	public List<boardDTO> selectByNum(int num) throws SQLException {
 		List<boardDTO> list = null;
 			
@@ -159,6 +161,39 @@ public class boardDAO {
 			
 		return list;
 	}
+	
+// 페이징 처리하는 글 목록 만들기.
+//	public List getboardList(int startRow, int pageSize) throws SQLException {
+//		
+//		List boardList = new ArrayList();
+//		
+//		try {
+//			pstmt = conn.prepareStatement(D.SQL_GET_BOARD_LIST);
+//			pstmt.setInt(1, startRow -1);
+//			pstmt.setInt(2, pageSize);
+//			
+//			rs = pstmt.executeQuery();
+//			
+//			while(rs.next()) {
+//			boardDTO bdto = new boardDTO();
+//			
+//			bdto.setNum(rs.getInt("num"));
+//			bdto.setTitle(rs.getString("title"));
+//			bdto.setContent(rs.getString("content"));
+//			bdto.setUser_ID(rs.getString(""));
+//			}
+//			catch (SQLException e) {
+//				conn.rollback();
+//				throw e;
+//				}
+//			
+//		finally {
+//			close();
+//		}
+//		return boardList;
+//	}
+
+// getboardlist 수정중
 	
 	public int update(int num, String title, String content, String user_ID) throws SQLException {
 		int cnt = 0;
