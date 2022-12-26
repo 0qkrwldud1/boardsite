@@ -11,13 +11,13 @@ import java.util.List;
 
 import common.D;
 
-public class boardDAO {
+public class boardDAO_ori {
 
 	Connection conn;
 	PreparedStatement pstmt;
 	ResultSet rs;
 	
-	public boardDAO() { 
+	public boardDAO_ori() { 
 		try { 
 			Class.forName(D.DRIVER);
 			conn = DriverManager.getConnection(D.URL, D.USERID, D.USERPW);
@@ -37,14 +37,11 @@ public class boardDAO {
 				conn.close();
 	}
 	
-	
-	
 	private List<boardDTO> buildList(ResultSet rs) throws SQLException {
 			List<boardDTO> list = new ArrayList<>();
 			
 			// 리스트 만들기
 			// list라는 새로운 arraylist를 만듦
-			
 			
 			while (rs.next()) {
 
@@ -78,8 +75,6 @@ public class boardDAO {
 		}
 		return list;
 	}
-	
-	
 	
 	public int insert(boardDTO dto) throws SQLException {
 		int cnt = 0;

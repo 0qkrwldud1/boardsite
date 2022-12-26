@@ -10,7 +10,7 @@ public class boardDTO {
 	private String user_ID; // user_ID
 	private int viewCnt; // bd_viewcnt
 	private LocalDateTime regDate; // bd_regdate
-	//private int available; //bd_available
+	
 	
 	public boardDTO( ) {
 		super();
@@ -26,26 +26,9 @@ public class boardDTO {
 		this.user_ID = user_ID;
 		this.viewCnt = viewCnt;
 		this.regDate = regDate;
-		//this.available = available;
+		
 	}
-//
-//	public boardDTO(int num, String title, String content, String user_ID, int viewCnt, LocalDateTime regDate) {
-//		super();
-//		this.num = num;
-//		this.title = title;
-//		this.content = content;
-//		this.user_ID = user_ID;
-//		this.viewCnt = viewCnt;
-//		this.regDate = regDate;
-//	}
-	
-//	public int getAvailable() {
-//			return available;
-//		}
-//	
-//		public void setAvailable(int available) {
-//			this.available = available;
-//		}
+
 	public int getNum() {
 		return num;
 	}
