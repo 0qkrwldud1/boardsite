@@ -113,16 +113,16 @@ int startRow = (currentPage - 1) * pageSize + 1;
    		%>
    		
    		<%if (startPage > pageBlock) { %>
-   			<a href = "list.jsp?pageNum=<%=startPage-pageBlock%>"> prev</a>
+   			<a href = "list.do?pageNum=<%=startPage-pageBlock%>"> prev</a>
    			
 	   	<%} %>
 	   	
 	   	<% for (int i =startPage; i<= endPage; i++) { %>
-	   			<a href = "list.jsp?pageNum=<%=i %>"> <%=i %></a>
+	   			<a href = "list.do?pageNum=<%=i %>"> <%=i %></a>
 	   	<%} %>
 	   	
 	   	<% if (endPage<pageCount) { %>
-	   			<a href = "list.jsp?pageNum=<%=startPage+pageBlock %>"> next</a>
+	   			<a href = "list.do?pageNum=<%=startPage+pageBlock %>"> next</a>
 	   			
 	   	<%} %>
 	   	

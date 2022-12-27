@@ -192,7 +192,7 @@ public class boardDAO {
 		List<boardDTO> list = null;
 			
 		try {
-			pstmt = conn.prepareStatement(D.SQL_BOARD_SELECT_BY_NUM);
+			pstmt = conn.prepareStatement(D.SQL_GET_BOARD_LIST);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
 			list = buildList(rs);
