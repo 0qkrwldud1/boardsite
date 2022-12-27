@@ -5,26 +5,7 @@
 <%
 List<boardDTO> list = (List<boardDTO>) request.getAttribute("list");
 %>
-<%
 
-String items = request.getParameter("items");
-String text = request.getParameter("text");
-
-boardDAO bdao = new boardDAO();
-
-int cnt  = bdao.getboardCount(items, text);
-
-int pageSize = 3;
-
-String pageNum = request.getParameter("pageNum");
-
-if (pageNum == null) {
-		pageNum = "1";
-}
-
-int currentPage = Integer.parseInt(pageNum);
-int startRow = (currentPage - 1) * pageSize + 1;
-%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -85,50 +66,13 @@ int startRow = (currentPage - 1) * pageSize + 1;
 		%>
 	</table>
 	<br>
-	</div> 
+	</div>
 	<div class = "btn_area">
 	<button class= "btn" onclick="location.href='write.do'">Publish</button>
    	</div>
+   	</main>	
    	
-   	
-   	<div id = "page_control">
-   		<%
-   		if(cnt != 0) {
-   			// 페이징처리
-   			//전체 페이지 수 계산
-   			int pageCount = cnt / pageSize + (cnt%pageSize==0?0:1);
-   			
-   			//한 페이지에 보여줄 페이지 블럭
-   			int pageBlock = 10;
-   			
-   			//한 페이지에 보여줄 페이지 블럭 시작번호 계산
-   			int startPage = ((currentPage-1)/ pageBlock)*pageBlock+1;
-   			
-   			//한 페이지에 보여줄 페이지 블럭 끝 번호 계산
-   			int endPage = startPage + pageBlock-1;
-   			if(endPage > pageCount) {
-   				endPage = pageCount;
-   			}
    		
-   		%>
-   		
-   		<%if (startPage > pageBlock) { %>
-   			<a href = "list.jsp?pageNum=<%=startPage-pageBlock%>"> prev</a>
-   			
-	   	<%} %>
-	   	
-	   	<% for (int i =startPage; i<= endPage; i++) { %>
-	   			<a href = "list.jsp?pageNum=<%=i %>"> <%=i %></a>
-	   	<%} %>
-	   	
-	   	<% if (endPage<pageCount) { %>
-	   			<a href = "list.jsp?pageNum=<%=startPage+pageBlock %>"> next</a>
-	   			
-	   	<%} %>
-	   	
-	   	<%} %>
-   	</div>
-   	</main>		
    		
      <footer>
         <div id="foot">

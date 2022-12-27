@@ -19,7 +19,8 @@ public class SelectCommand implements Command {
 		List<boardDTO> list = null;
 
 		try {
-			list = new boardDAO().selectByNum(num);
+			list = new boardDAO().getboardList(num, num);
+								// selectByNum(num); 바꾸기전
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
