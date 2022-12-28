@@ -40,47 +40,31 @@ public class boardDAO {
 	
 	// 새로 추가한 메서드 페이징처리 
 	
-	public int getboardCount(String items, String text) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		int x = 0;
-
-		String sql;
+	public int getboardCount() throws SQLException{
 		
-		if (items == null && text == null)
-			sql = "select  count(*) from board";
-		else
-			sql = "select   count(*) from board where " + items + " like '%" + text + "%'";
+
+		int cnt = 0;
 		
 		try {
-			Class.forName(D.DRIVER);
-			conn = DriverManager.getConnection(D.URL, D.USERID, D.USERPW);
-			pstmt = conn.prepareStatement(sql);
+			
+			pstmt = conn.prepareStatement(D.SQL_BOARD_COUNT);
 			rs = pstmt.executeQuery();
 
-			if (rs.next()) 
-				x = rs.getInt(1);
+			if (rs.next()) {
+				cnt = rs.getInt(1);
+				System.out.println("게시판 총 글 개수  : "+cnt);
+			}								
 			
-		} catch (Exception ex) {
-			System.out.println("getboardCount() 에러 : " + ex);
-		} finally {			
-			try {				
-				if (rs != null) 
-					rs.close();							
-				if (pstmt != null) 
-					pstmt.close();				
-				if (conn != null) 
-					conn.close();												
-			} catch (Exception ex) {
-				throw new RuntimeException(ex.getMessage());
-			}		
+		} catch (Exception e) {
+				e.printStackTrace();
+			}	finally {
+				close();	
 		}		
-		return x;
+		return cnt;
 	}
 	// db에 있는 글 개수 확인하는 메서드 
 	
+	/*
 	private List<boardDTO> buildList(ResultSet rs) throws SQLException {
 			List<boardDTO> list = new ArrayList<>();
 			
@@ -105,20 +89,21 @@ public class boardDAO {
 			}
 			return list;
 	}
-
+	 */
+	
 	public List<boardDTO> select() throws SQLException {
-			List<boardDTO> list = null;
+		List<boardDTO> boardList = null;
 			
 			// 보드 테이블에서 레코드 가져오기
 
 		try {
 				pstmt = conn.prepareStatement(D.SQL_BOARD_SELECT);
 				rs = pstmt.executeQuery();
-				list = buildList(rs);
+				boardList = getboardList(0, 0);
 		} finally {
 				close();
 		}
-		return list;
+		return boardList;
 	}
 	
 	
@@ -133,10 +118,10 @@ public class boardDAO {
 		
 		
 		int num;
-		String[] generatedCols = {"bd_num"};
+		
 
 		try {
-			pstmt = conn.prepareStatement(D.SQL_BOADR_INSERT, generatedCols);
+			pstmt = conn.prepareStatement(D.SQL_BOADR_INSERT);
 		
 			pstmt.setString(1, title);
 			pstmt.setString(2, content);
@@ -162,7 +147,7 @@ public class boardDAO {
 
 
 	public List<boardDTO> readByNum(int num) throws SQLException {
-		List<boardDTO> list = null;
+		List<boardDTO> boardList = null;
 		
 		try {
 			conn.setAutoCommit(false);
@@ -174,7 +159,7 @@ public class boardDAO {
 			pstmt = conn.prepareStatement(D.SQL_BOARD_SELECT_BY_NUM);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
-			list = buildList(rs);
+			boardList = getboardList(num,num);
 			
 			conn.commit();
 		} catch (SQLException e) {
@@ -184,29 +169,29 @@ public class boardDAO {
 			close();
 		}	
 	    
-		return list;
+		return boardList;
 	}
 	
 	// getboardlist랑 바꾸기 
 	public List<boardDTO> selectByNum(int num) throws SQLException {
-		List<boardDTO> list = null;
+		List<boardDTO> boardList = null;
 			
 		try {
 			pstmt = conn.prepareStatement(D.SQL_GET_BOARD_LIST);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
-			list = buildList(rs);
+			boardList = getboardList(0,0);
 		} finally {
 			close();
 		}
 			
-		return list;
+		return boardList;
 	}
 	
 // 페이징 처리하는 글 목록 만들기.
-	public List getboardList(int startRow, int pageSize) throws SQLException {
+	public List<boardDTO> getboardList(int startRow, int pageSize) throws SQLException {
 		
-		List boardList = new ArrayList();
+		List<boardDTO> boardList = new ArrayList<boardDTO>();
 		
 		try {
 			pstmt = conn.prepareStatement(D.SQL_GET_BOARD_LIST);
@@ -225,7 +210,10 @@ public class boardDAO {
 			bdto.setViewCnt(rs.getInt("viewcnt"));
 			bdto.setRegDate(rs.getObject("regdate", LocalDateTime.class));
 			
+			
 			boardList.add(bdto);
+			
+			
 			}
 			
 			System.out.println("DAO: 글 정보 저장 완료" +boardList.size());

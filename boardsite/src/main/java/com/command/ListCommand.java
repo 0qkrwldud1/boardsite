@@ -15,14 +15,14 @@ public class ListCommand implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-			List<boardDTO> list = null;
+			List<boardDTO> boardList = null;
 			try {
-				list = new boardDAO().select();
+				boardList = new boardDAO().select();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 			
-			request.setAttribute("list", list);
+			request.setAttribute("boardList", boardList);
 		}	
 	
 	}

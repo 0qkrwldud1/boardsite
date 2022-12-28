@@ -111,6 +111,17 @@ h1 {
 	background-color: #f8f8f8;
 }
 
+#page_control {
+	margin: 0 auto;
+	width: 50%;
+	height: 50px;
+	display: block;
+	text-align: center;
+	font-size: 18px;
+	
+	
+}
+
 .up_sub {
 	margin-left: 5%;
 	

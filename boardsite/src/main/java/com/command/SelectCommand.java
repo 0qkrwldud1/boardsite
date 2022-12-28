@@ -16,15 +16,16 @@ public class SelectCommand implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		int num = Integer.parseInt(request.getParameter("num"));
-		List<boardDTO> list = null;
+		List<boardDTO> boardList = null;
 
 		try {
-			list = new boardDAO().getboardList(num, num);
+			boardList = new boardDAO().getboardList(num, num);
 								// selectByNum(num); 바꾸기전
+								// getboardList(num, num);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		request.setAttribute("list", list);
+		request.setAttribute("boardList", boardList);
 	}
 }

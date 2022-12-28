@@ -5,7 +5,7 @@ public class D {
 	public static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 	public static final String URL = "jdbc:mysql://localhost:3306/boardsite?characterEncoding=UTF-8";
 	public static final String USERID = "myuser";
-	public static final String USERPW = "p5595";
+	public static final String USERPW = "k404";
 	
 	public static final String SQL_BOADR_INSERT = 
 			"INSERT INTO board"
@@ -32,6 +32,11 @@ public class D {
 	
 	// 목록 페이징 처리
 	public static final String SQL_GET_BOARD_LIST = 
-			"SELECT * FROM board ORDER BY bd_num DESC LIMIT ?,?";
+			"SELECT bd_num num, bd_title title, bd_content content, user_ID user_ID,"
+			+ "bd_viewcnt viewcnt, bd_regdate regdate " + "FROM board ORDER BY bd_num DESC LIMIT 0,10";
+	
+	public static final String SQL_BOARD_COUNT =
+			"SELECT COUNT(*) FROM board";
+	
 
 }

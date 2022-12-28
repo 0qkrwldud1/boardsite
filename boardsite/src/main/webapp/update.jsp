@@ -91,7 +91,7 @@ if (list == null || list.size() == 0) {
 	<br><hr><br>
 	<div class = "btn_area">
 	<button class = "btn" onclick="histroy.back()">Back</button>
-	<button class = "btn" onclick="location.href='list.do'">Borad List</button>
+	<button class = "btn" onclick="location.href='list.do'">Board List</button>
 	</div>
 	<script>
 	function chkSubmit() {
