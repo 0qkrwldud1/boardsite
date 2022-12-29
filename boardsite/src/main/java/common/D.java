@@ -12,12 +12,12 @@ public class D {
 					+ "(bd_title, bd_content, user_ID)"
 					+ "VALUES(?, ?, ?)";
 	
-	public static final String SQL_BOARD_SELECT =
+	public static final String SQL_BOARD_GET =
 			"SELECT bd_num num, bd_title title, bd_content content, user_ID user_ID, "
 			+ "bd_viewcnt viewcnt, bd_regdate regdate " + "FROM board ORDER BY bd_num DESC ";
 	
 	
-	public static final String SQL_BOARD_SELECT_BY_NUM =
+	public static final String SQL_BOARD_GET_BY_NUM =
 			"SELECT bd_num num, bd_title title, bd_content content, user_ID user_ID,"
 			+ "bd_viewcnt viewcnt, bd_regdate regdate " + "FROM board WHERE bd_num = ?";
 		
@@ -31,12 +31,15 @@ public class D {
 			"DELETE FROM board WHERE bd_num = ?";
 	
 	// 목록 페이징 처리
-	public static final String SQL_GET_BOARD_LIST = 
+	public static final String SQL_BOARD_GET_LIST = 
 			"SELECT bd_num num, bd_title title, bd_content content, user_ID user_ID,"
-			+ "bd_viewcnt viewcnt, bd_regdate regdate " + "FROM board ORDER BY bd_num DESC LIMIT 0,10";
+			+ "bd_viewcnt viewcnt, bd_regdate regdate " + "FROM board ORDER BY bd_num DESC ";
 	
 	public static final String SQL_BOARD_COUNT =
 			"SELECT COUNT(*) FROM board";
+	
+	public static final String SQL_BOARD_LIST =
+			"SELECT * FROM board ORDER BY bd_num DESC";
 	
 
 }

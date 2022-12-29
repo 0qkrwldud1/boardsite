@@ -67,7 +67,7 @@ public class boardDAO_ori {
 			// 보드 테이블에서 레코드 가져오기
 
 		try {
-				pstmt = conn.prepareStatement(D.SQL_BOARD_SELECT);
+				pstmt = conn.prepareStatement(D.SQL_BOARD_GET);
 				rs = pstmt.executeQuery();
 				list = buildList(rs);
 		} finally {
@@ -124,7 +124,7 @@ public class boardDAO_ori {
 			pstmt.executeUpdate();
 			pstmt.close();
 			
-			pstmt = conn.prepareStatement(D.SQL_BOARD_SELECT_BY_NUM);
+			pstmt = conn.prepareStatement(D.SQL_BOARD_GET_BY_NUM);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
 			list = buildList(rs);
@@ -144,7 +144,7 @@ public class boardDAO_ori {
 		List<boardDTO> list = null;
 			
 		try {
-			pstmt = conn.prepareStatement(D.SQL_BOARD_SELECT_BY_NUM);
+			pstmt = conn.prepareStatement(D.SQL_BOARD_GET_BY_NUM);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
 			list = buildList(rs);

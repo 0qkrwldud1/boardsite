@@ -4,9 +4,9 @@
 <%@ page import="java.util.*"%>
 
 <%
-List<boardDTO> list = (List<boardDTO>) request.getAttribute("list");
+List<boardDTO> boardList = (List<boardDTO>) request.getAttribute("boardList");
 
-if (list == null || list.size() == 0) {
+if (boardList == null || boardList.size() == 0) {
 %>
 <script>
 	
@@ -21,7 +21,7 @@ if (list == null || list.size() == 0) {
 %>
 
 <%
-	boardDTO dto = list.get(0);
+	boardDTO dto = boardList.get(0);
 	int num = dto.getNum();
 	String title = dto.getTitle();
 	String content = dto.getContent();

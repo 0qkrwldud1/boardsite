@@ -1,6 +1,7 @@
 package com.command;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +12,7 @@ import com.beans.boardDTO;
 
 public class SelectCommand implements Command {
 
-	// 리스트를 불러옴. -> d에 selectbynum사용.
+	// 수정시 불러오는 코맨드
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
@@ -19,9 +20,9 @@ public class SelectCommand implements Command {
 		List<boardDTO> boardList = null;
 
 		try {
-			boardList = new boardDAO().getboardList(num, num);
-								// selectByNum(num); 바꾸기전
-								// getboardList(num, num);
+			boardList = new boardDAO().getByNum(num);
+								// selectByNum(num); 바꾸기전 -> get
+								// getboardList();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

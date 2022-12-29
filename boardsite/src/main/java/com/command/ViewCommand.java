@@ -2,6 +2,7 @@ package com.command;
 
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,13 +15,13 @@ public class ViewCommand implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		List<boardDTO> list = null;
+		List<boardDTO> boardList = null;
 
 		int num = Integer.parseInt(request.getParameter("num"));
 
 		try {
-			list = new boardDAO().readByNum(num);
-			request.setAttribute("list", list);
+			boardList = new boardDAO().readByNum(num);
+			request.setAttribute("boardList", boardList);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

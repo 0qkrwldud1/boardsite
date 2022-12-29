@@ -1,9 +1,10 @@
+<%@page import="java.sql.ResultSet"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.beans.*"%>
 <%@ page import="java.util.*"%>
 <%
-ArrayList<boardDTO> boardList = (ArrayList<boardDTO>) request.getAttribute("boardList");
+List<boardDTO> boardList = (List<boardDTO>) request.getAttribute("boardList");
 %>
 
 <%
@@ -11,7 +12,7 @@ ArrayList<boardDTO> boardList = (ArrayList<boardDTO>) request.getAttribute("boar
 // boardDAO 객체생성
 boardDAO bdao = new boardDAO();
 
-// 디비에 글이 있는지 확인 후 있으면 글 모두 가져오기,없으면 가져오지않기 : getBoardCount()
+// 디비에 글이 있는지 확인 후 있으면 글 모두 가져오기,없으면 가져오지않기 : getboardCount()
 int cnt = bdao.getboardCount();
 
 // 페이징처리
@@ -34,7 +35,10 @@ int startRow = (currentPage - 1) * pageSize + 1;
 //currentPage가 3인경우, (3-1)x10+1 = 21
 
 // 끝행번호계산
-int endRow= currentPage * pageSize;
+
+
+
+int endRow= currentPage * pageSize; 
 //currentPage가 2인경우, 2*10 = 20
 //currentPage가 3인경우, 3*10 = 30
 
@@ -42,14 +46,15 @@ int endRow= currentPage * pageSize;
 // 게시판 총 글의 수 : cnt개
 
 // getBoardList() 메서드생성
-System.out.println(bdao.getboardList());
-ArrayList boardList = null;
 
-if(cnt != 0){
-	//일반적인 리스트호출방법,  아래는 페이징처리한 리스트호출방법
-	//boardList = bdao.getBoardList();
-	// 페이징 처리한 리스트 호출 => getBoardList()메서드만들기(메서드 오버로딩)
+/*
+System.out.println(bdao.getboardList());
+boardList = null;
+
+if(cnt != 0) {
 	boardList = bdao.getboardList(startRow, pageSize);
+}
+*/
 
 %>
 <!DOCTYPE html>
@@ -97,9 +102,10 @@ if(cnt != 0){
 		</tr>
 		
 		<%
-		
-		for(int i=0;i<boardList.size(); i++){
-			boardDTO bdto = (boardDTO)boardList.get(i);
+		if (boardList != null) {
+		for(boardDTO bdto : boardList){
+			
+			
 		%>
 		<tr>
 			<td><%=bdto.getNum()%></td>
@@ -111,7 +117,7 @@ if(cnt != 0){
 		</tr>
 		<%
 			}
-		
+		}
 		%>
 	</table>
 	<br>
@@ -122,8 +128,8 @@ if(cnt != 0){
    	
    	
    	<div id = "page_control">
-   		<%
-   		if(cnt != 0) { // cnt는 전체 글 갯수
+   		<% if(cnt != 0) { 
+   			// cnt는 전체 글 갯수
    			// 페이지갯수처리
    			//전체 페이지 수 계산
    			int pageCount = cnt / pageSize + (cnt%pageSize == 0? 0: 1);
@@ -136,36 +142,40 @@ if(cnt != 0){
    			
    			//한 페이지에 보여줄 페이지 블럭 끝 번호 계산
    			int endPage = startPage + pageBlock - 1;
-   			if(endPage > pageCount) {
+   			if(endPage > pageCount) {  
    					endPage = pageCount;
-   			}
+   		 	} 
    		// 이전 페이지
    		%>
    		
-   		<% if (startPage > pageBlock) { 
-   				%>
-   				<a href = "list.jsp?pageNum=<%=startPage-pageBlock%>"> prev </a>
-   				<%
-	   	} 
-   		// 페이지 숫자
-	   		 for (int i=startPage; i<= endPage; i++) { 
-	   		 	%>
-	   			<a href = "list.jsp?pageNum=<%=i %>"> <%=i %> </a>
-	   			<%
-	   	} 
-	   	// 다음 페이지
-	  		 if (endPage<pageCount) { 
-	  		 	%>
-	   			<a href = "list.jsp?pageNum=<%=startPage+pageBlock %>"> next </a>
-	   			<%
-	   	} 
-	   	%>
+   		<% if (startPage > pageBlock) { %>
+   				
+   				<a href = "list.do?pageNum=<%=startPage-pageBlock%>"> prev </a>
+   				
+	   <% } %>
+   		
+	   <% 	 for (int i=startPage; i<= endPage; i++) { %>
+	   		 	
+	   			<a href = "list.do?pageNum=<%=i %>"> <%=i %> </a>
+	   			
+	  	<% } %>
 	   	
-	   	<%
+	  	<% 	 if (endPage<pageCount) { %>
+	  		 	
+	   			<a href = "list.do?pageNum=<%=startPage+pageBlock %>"> next </a>
+	   	<% } %>
 	   	
-	   	 } 
-	   	 %>
-   	</div>
+	
+	<%
+	} 
+	
+	%>
+	   	
+		</div>   	
+	   	
+	   	
+	   	
+   
    	</main>		
    		
      <footer>
