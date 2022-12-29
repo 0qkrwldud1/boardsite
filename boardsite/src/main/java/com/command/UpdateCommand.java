@@ -16,6 +16,7 @@ public class UpdateCommand implements Command {
 		int num = Integer.parseInt(request.getParameter("num"));
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
+		content = content.replaceAll("\r\n","<br>");
 		String user_ID = request.getParameter("user_ID");
 
 		if ((title != null && title.trim().length() > 0) ) {

@@ -44,9 +44,9 @@
 			</div>
 		
 			
-			<div class = "con">
+			<div >
 			
-				<textarea cols="150" rows="20"  name="content"></textarea>
+				<textarea id = "con" name="content" onkeypress="onTestChange();"></textarea>
 				<br><br>
 			</div>
 		
@@ -85,6 +85,20 @@
 		}
 	</script>
 	
+	<script >
+	function onTestChange() {
+	    var key = window.event.keyCode;
+
+	    // If the user has pressed enter
+	    if (key === 13) {
+	        document.getElementById("con").value = document.getElementById("con").value + "\n*";
+	        return false;
+	    }
+	    else {
+	        return true;
+	    }
+	}
+	</script>
 	
 	<footer>
         <div id="foot">

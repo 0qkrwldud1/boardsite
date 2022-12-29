@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<% pageContext.setAttribute("replaceChar", "\n"); %>
 <%@ page import="com.beans.*"%>
 <%@ page import="java.util.*"%>
 
 <%
-List<boardDTO> list = (List<boardDTO>) request.getAttribute("list");
+List<boardDTO> boardList = (List<boardDTO>) request.getAttribute("boardList");
 
-if (list == null || list.size() == 0) {
+if (boardList == null || boardList.size() == 0) {
 %>
 <script>
 	alert("해당 정보가 삭제되었거나 존재하지 않습니다.");
@@ -17,7 +19,7 @@ if (list == null || list.size() == 0) {
 }
 %>
 <%
-	boardDTO dto = list.get(0);
+	boardDTO dto = boardList.get(0);
 	int num = dto.getNum();
 	String title = dto.getTitle();
 	String content = dto.getContent();
@@ -79,9 +81,9 @@ if (list == null || list.size() == 0) {
 			<strong>Post</strong> <%=regDate %><br><br>
 			</div>
 		</div>
-	<div class = "con">
+	<div >
 		
-		<textarea cols="150" rows="20"  name="text"><%=content %></textarea>
+		<textarea class = "con"  name="content"><%=content %></textarea>
 		
 	</div>	
 	

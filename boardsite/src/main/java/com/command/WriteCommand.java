@@ -16,6 +16,7 @@ public class WriteCommand implements Command {
 		
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
+		content = content.replaceAll("\r\n","<br>");
 		String user_ID = request.getParameter("user_ID");
 		
 		

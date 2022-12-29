@@ -208,6 +208,7 @@ public class boardDAO {
 				bdto.setNum(rs.getInt("num"));
 				bdto.setTitle(rs.getString("title"));
 				bdto.setContent(rs.getString("content"));
+				
 				bdto.setUser_ID(rs.getString("user_ID"));
 				bdto.setViewCnt(rs.getInt("viewcnt"));
 				bdto.setRegDate(rs.getObject("regdate", LocalDateTime.class));
