@@ -227,6 +227,10 @@ h5{
  color: rgb(131, 131, 131);
 }
 
+a {
+	text-decoration: none;
+}
+
 a:link {
   color : rgb(131, 131, 131);
 }
@@ -237,6 +241,7 @@ a:hover,
 a:focus,
 a:active {
    color: grey !important;
+   text-decoration: none;
 }
 #up_a{
   margin-top: 7%;

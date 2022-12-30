@@ -93,7 +93,7 @@ h1 {
 	
 }
 
-.con{
+#con{
 	font-size:18px;
 	margin: 0 auto;
 	width: 50%;
@@ -101,6 +101,7 @@ h1 {
 	display: block;
 	border: 1px solid;
 	border-radius: 5px;
+	
 }
 
 .view_content {
@@ -159,7 +160,7 @@ h1 {
 }
 #grid_header a {
  text-decoration: none;
- color: rgb(142, 143, 145);
+ color: white;
 }
 #grid_header ul li {
  list-style: none;
@@ -183,6 +184,13 @@ a:link {
 a:visited {
  color : rgb(131, 131, 131);
 }
+
+a:hover,
+a:focus,
+a:active {
+   color: grey !important;
+ }
+
 a {
 	text-decoration: none;
 }

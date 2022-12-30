@@ -16,7 +16,7 @@ public class WriteCommand implements Command {
 		
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		content = content.replaceAll("\r\n","<br>");
+		content = content.replaceAll("\r\n","<br>"); // 엔터키 db에 <br>태그로 변환해서 저장
 		String user_ID = request.getParameter("user_ID");
 		
 		

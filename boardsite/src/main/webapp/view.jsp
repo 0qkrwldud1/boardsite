@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="com.beans.*"%>
 <%@ page import="java.util.*"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 List<boardDTO> boardList = (List<boardDTO>) request.getAttribute("boardList");
 
@@ -27,8 +27,10 @@ if (boardList == null || boardList.size() == 0) {
 	String content = dto.getContent();
 	String user_ID = dto.getUser_ID();
 	int viewCnt = dto.getViewCnt();
-	String regDate = dto.getRegDateTime(); 
+	String regDate = dto.getRegDateTime();
+	
 %>
+
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -38,7 +40,8 @@ if (boardList == null || boardList.size() == 0) {
 <link rel="stylesheet" href="css/post.css" >
 </head>
 <body>
-
+<jsp:include page="menu_post.jsp" />
+<!--   
 	<header>
         <div id="grid_header">
           <nav class="header_top" >
@@ -56,7 +59,7 @@ if (boardList == null || boardList.size() == 0) {
             <span class="banddy"> banddy </span><span class="logo_text" style="font-style: italic; color: black; font-size: 15px;"> _ is a space for the group members.</span>
           </div>
      </header>
-
+-->
 	<h1><%=title%></h1>
 	<hr>
 	<div class = "container">
@@ -81,11 +84,15 @@ if (boardList == null || boardList.size() == 0) {
 	
 	
 	<br><hr><br>
+	
 	<div class = "btn_area">
-	<button class = "btn" type="button" onclick="chkDelete(<%=num%>)">Delete</button>
+	<c:set var="user_id" value="<%=user_ID%>" />
+	<c:if test="${user_ID == user_id}">
+		<button class = "btn" type="button" onclick="chkDelete(<%=num%>)">Delete</button>
+		<button class = "btn" type="button" onclick="location.href='update.do?num=<%=num%>'">Update</button>
+		<button class = "btn" type="button" onclick="location.href='write.do'">New Post</button>
+	</c:if>
 	<button class = "btn" type="button" onclick="location.href='list.do'">Board List</button>
-	<button class = "btn" type="button" onclick="location.href='update.do?num=<%=num%>'">Update</button>
-	<button class = "btn" type="button" onclick="location.href='write.do'">New Post</button>
     </div>
     <script>
     function chkDelete(num) {

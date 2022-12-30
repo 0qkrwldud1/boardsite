@@ -19,6 +19,8 @@
 <body>
   <%
   	String user_ID = null; // 현재 세션 상태를 체크함.
+  	
+  	
   	if(session.getAttribute("user_ID") != null) {
   		user_ID = (String)session.getAttribute("user_ID");
   	}
@@ -33,12 +35,12 @@
   	
   	userDAO loguser = new userDAO();
   	int result = loguser.login(userDTO.getUser_ID(), userDTO.getUser_PW());
-  	if (result ==1 ) {
+  	if (result == 1 ) {
   		session.setAttribute("user_ID", userDTO.getUser_ID());
   		PrintWriter script = response.getWriter();
   		script.println("<script>");
   		script.println("alert('로그인 성공')");
-  		script.println("location.href = 'list.jsp'");
+  		script.println("location.href = 'main.jsp'");
   		script.println("</script>");
   		
   	}else if (result == 0) {

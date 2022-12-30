@@ -14,6 +14,8 @@
 </head>
 
 <body>
+<jsp:include page="menu_sign.jsp" />
+<!--  
     <header>
         <div id="grid_header">
           <nav class="header_top" >
@@ -34,7 +36,7 @@
             </div>
           </div>
     </header>
-
+-->
 
 <main>
     <section>
@@ -51,7 +53,7 @@
             <input type="text" placeholder="user id" name = "user_ID"/>
             <input type="password" placeholder="password" name = "user_PW" />
             <input type="text" placeholder="user Name" name = "user_Name"/>
-            <div style = "text-align: center;">
+            <div class= "gen_radio">
             <div>
             <input type="radio" placeholder="user gender" name = "user_Gender" 
             autocomplate = "off" value = "남자" checked/>M

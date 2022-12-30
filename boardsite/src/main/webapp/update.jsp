@@ -35,7 +35,8 @@ if (boardList == null || boardList.size() == 0) {
 <link rel="stylesheet" href="css/post.css" >
 </head>
 <body>
-
+<jsp:include page="menu_post.jsp" />
+<!--  
 	<header>
         <div id="grid_header">
           <nav class="header_top" >
@@ -53,7 +54,7 @@ if (boardList == null || boardList.size() == 0) {
             <span class="banddy"> banddy </span><span class="logo_text" style="font-style: italic; color: black; font-size: 15px;"> _ is a space for the group members.</span>
           </div>
      </header>
-
+-->
 	<h1><%=title %></h1>
 	<hr>
 	
@@ -83,8 +84,8 @@ if (boardList == null || boardList.size() == 0) {
 		</div>
 	<div >
 		
-		<textarea class = "con"  name="content"><%=content %></textarea>
-		
+		<textarea id= "con"  name="content"><%=content %></textarea>
+		<!-- name이 달라서 수정시 디비에 입력x -> content로 변경. -->
 	</div>	
 	
 	<input class = "up_btn" type="submit" value="Update"/>

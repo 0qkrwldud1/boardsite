@@ -8,8 +8,8 @@
 <link rel="stylesheet" href="css/post.css" >
 </head>
 <body>
-	
-	
+	<jsp:include page="menu_post.jsp" />
+<!--  
       <header>
         <div id="grid_header">
           <nav class="header_top" >
@@ -27,7 +27,7 @@
             <span class="banddy"> banddy </span><span class="logo_text" style="font-style: italic; color: black; font-size: 15px;"> _ is a space for the group members.</span>
           </div>
      </header>
-	
+-->	
 	
 	<hr>
 	
@@ -44,10 +44,10 @@
 			</div>
 		
 			
-			<div >
+			<div>
 			
-				<textarea id = "con" name="content" onkeypress="onTestChange();"></textarea>
-				<br><br>
+				<textarea id= "con" name="content" onkeypress="onTestChange();"></textarea>
+				
 			</div>
 		
 		</div>

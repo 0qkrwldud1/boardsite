@@ -47,7 +47,7 @@ int endRow= currentPage * pageSize;
 
 // getBoardList() 메서드생성
 
-/*
+/* 오류
 System.out.println(bdao.getboardList());
 boardList = null;
 
@@ -57,6 +57,10 @@ if(cnt != 0) {
 */
 
 %>
+<%
+	String user_ID = (String) session.getAttribute("user_ID");
+%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -68,7 +72,8 @@ if(cnt != 0) {
   </head>
   
   <body>
-    
+    <jsp:include page="menu_post.jsp" />
+    <!--   
       <header>
         <div id="grid_header">
           <nav class="header_top" >
@@ -86,7 +91,7 @@ if(cnt != 0) {
             <span class="banddy"> banddy </span><span class="logo_text" style="font-style: italic; color: black; font-size: 15px;"> _ is a space for the group members.</span>
           </div>
      </header>
-   		
+   	-->	
    	<main>
    	
    	
@@ -123,7 +128,7 @@ if(cnt != 0) {
 	<br>
 	</div> 
 	<div class = "btn_area">
-	<button class= "btn" onclick="location.href='write.do'">Publish</button>
+	<button class= "btn" onclick="location.href='write.do'" onclick="checkForm(); return false;">Publish</button>
    	</div>
    	
    	
@@ -177,6 +182,17 @@ if(cnt != 0) {
 	   	
    
    	</main>		
+   		
+   	<script type="text/javascript">
+	function checkForm() {	
+		if (${user_ID==null}) {
+			alert("로그인 해주세요.");
+			return false;
+		}
+
+		location.href = "./BoardWriteForm.do?id=<%=user_ID%>"
+	}
+	</script>
    		
      <footer>
         <div id="foot">

@@ -17,6 +17,8 @@
     <script src="js/main.js"></script> 
 </head>
 <body>
+<jsp:include page="menu_main.jsp" />
+<!--  jsp:include 사용
 <header>
   <div id="grid_header">
     <nav class="header_top" >
@@ -37,7 +39,7 @@
     
    </div>  
 </header>
-  
+ --> 
 <main>
   <section>
     <article>
