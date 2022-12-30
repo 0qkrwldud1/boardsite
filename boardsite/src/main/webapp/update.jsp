@@ -58,7 +58,8 @@ if (boardList == null || boardList.size() == 0) {
 	<h1><%=title %></h1>
 	<hr>
 	
-	<form name="frm" action="updateOk.do" method="post" onsubmit="return chkSubmit()">
+	<form name="frm" action="<%=request.getContextPath() %>updateOk.do" method="post" 
+		onsubmit="return chkSubmit()" enctype="multipart/form-data">
 	
 		<input type="hidden" name="num" value="<%=num %>"/>
 		<div class = "container">
@@ -87,7 +88,7 @@ if (boardList == null || boardList.size() == 0) {
 		<textarea id= "con"  name="content"><%=content %></textarea>
 		<!-- name이 달라서 수정시 디비에 입력x -> content로 변경. -->
 	</div>	
-	
+	<input id= "file" type="file" name="filename">
 	<input class = "up_btn" type="submit" value="Update"/>
 	</form>
 	

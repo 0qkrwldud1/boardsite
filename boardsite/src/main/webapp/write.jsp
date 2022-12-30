@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -31,7 +32,8 @@
 	
 	<hr>
 	
-	<form name="frm" action="writeOk.do" method="post" onsubmit="return chkSubmit()">
+	<form name="frm" action="<%=request.getContextPath() %>writeOk.do" method="post" 
+		onsubmit="return chkSubmit()" enctype="multipart/form-data">
 		<div id = "write_main">
 			<div class = "container">
 				<div class = "ti_list">
@@ -48,6 +50,13 @@
 			
 				<textarea id= "con" name="content" onkeypress="onTestChange();"></textarea>
 				
+			</div>
+			
+			<!-- input file -> css 적용 -->
+			<div class="filebox">
+			    <input class="upload-name" value="첨부파일" placeholder="filename">
+			    <label for="file">Upload</label> 
+			    <input type="file" id="file" name = "filename">
 			</div>
 		
 		</div>
@@ -99,7 +108,14 @@
 	    }
 	}
 	</script>
+	<script> // 파일첨부 이름 보이게 하는 기능.
 	
+	$("#file").on('change',function(){
+		  var fileName = $("#file").val();
+		  $(".upload-name").val(fileName);
+		});
+	
+	</script>
 	<footer>
         <div id="foot">
           <nav>

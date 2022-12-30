@@ -104,6 +104,13 @@ h1 {
 	
 }
 
+#file {
+	margin: 0 auto;
+	margin-top: 10px;
+	width: 50%;
+	display: block;
+}
+
 .view_content {
 	font-size:20px;
 	margin: 0 auto;
@@ -113,8 +120,45 @@ h1 {
 	background-color: #f8f8f8;
 	border: 1px solid;
 	border-radius: 5px;
+	padding-left: 15px;
+	padding-top: 10px;
 }
 
+textarea {
+	padding-left: 15px;
+	padding-top: 10px;
+}
+
+.filebox .upload-name {
+   	margin: 0 auto;
+	margin-top: 10px;
+	width: 50%;
+	display: block;
+    color: #999999;
+} 
+/* 파일 인풋 스타일 변경 */
+
+.filebox label {
+    margin: 0 auto;
+	margin-top: 10px;
+	width: 50%;
+	display: block;
+    color: #fff;
+    background-color: #599bb3;
+    cursor: pointer;
+    
+}
+/* 인풋 라벨 스타일 변경 */
+
+.filebox input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+/* 기존 디자인 없애기 */
 #page_control {
 	margin: 0 auto;
 	width: 50%;
