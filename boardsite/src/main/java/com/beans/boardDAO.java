@@ -110,11 +110,11 @@ public class boardDAO {
 	public int insert(boardDTO dto) throws SQLException {
 		int cnt = 0;
 		
-		// 사용자가 입력한 값인 title, summary, price 값을 가져온다.
+		// 사용자가 입력한 값인 title, content, user_ID, filename 값을 가져온다.
 		String title = dto.getTitle();
 		String content = dto.getContent();
 		String user_ID = dto.getUser_ID();
-		
+		String filename = dto.getFilename();
 		
 		int num;
 		String[] generatedCols = {"bd_num"};
@@ -128,7 +128,7 @@ public class boardDAO {
 			pstmt.setString(1, title);
 			pstmt.setString(2, content);
 			pstmt.setString(3, user_ID);
-			
+			pstmt.setString(4, filename);
 			
 			cnt = pstmt.executeUpdate();
 			

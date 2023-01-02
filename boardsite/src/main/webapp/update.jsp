@@ -33,6 +33,7 @@ if (boardList == null || boardList.size() == 0) {
 <meta charset="UTF-8">
 <title><%=title %> update</title>
 <link rel="stylesheet" href="css/post.css" >
+<script src="js/upload.js"></script> 
 </head>
 <body>
 <jsp:include page="menu_post.jsp" />
@@ -86,11 +87,25 @@ if (boardList == null || boardList.size() == 0) {
 	<div >
 		
 		<textarea id= "con"  name="content"><%=content %></textarea>
-		<!-- name이 달라서 수정시 디비에 입력x -> content로 변경. -->
+		<!-- name이 달라서 수정시 디비에 입력x -> content로 변경. -->	
+			
+			<div class="filebox">
+			    <input class="upload-name" value="첨부파일" placeholder="filename">
+			    <label for="file">Upload</label> 
+			    <input type="file" id="file" >
+			    <script> $("#file").on('change',function(){
+				   var fileName = $("#file").val();
+				   $(".upload-name").val(fileName);
+				 });
+			    </script>
+			    
+			</div>
 	</div>	
 	<input id= "file" type="file" name="filename">
 	<input class = "up_btn" type="submit" value="Update"/>
 	</form>
+	
+			
 	
 	<br><hr><br>
 	<div class = "btn_area">

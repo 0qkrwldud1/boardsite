@@ -9,8 +9,8 @@ public class D {
 	
 	public static final String SQL_BOADR_INSERT = 
 			"INSERT INTO board"
-					+ "(bd_title, bd_content, user_ID)"
-					+ "VALUES(?, ?, ?)";
+					+ "(bd_title, bd_content, user_ID, filename)"
+					+ "VALUES(?, ?, ?, ?)";
 	
 	public static final String SQL_BOARD_GET =
 			"SELECT bd_num num, bd_title title, bd_content content, user_ID user_ID, "

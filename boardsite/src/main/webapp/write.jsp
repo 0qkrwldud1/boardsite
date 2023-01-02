@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>write</title>
 <link rel="stylesheet" href="css/post.css" >
+<script src="js/upload.js"></script> 
 </head>
 <body>
 	<jsp:include page="menu_post.jsp" />
@@ -56,7 +57,8 @@
 			<div class="filebox">
 			    <input class="upload-name" value="첨부파일" placeholder="filename">
 			    <label for="file">Upload</label> 
-			    <input type="file" id="file" name = "filename">
+			    <input type="file" id="file" >
+			    
 			</div>
 		
 		</div>
@@ -106,16 +108,18 @@
 	    else {
 	        return true;
 	    }
-	}
-	</script>
-	<script> // 파일첨부 이름 보이게 하는 기능.
+	}	
 	
 	$("#file").on('change',function(){
 		  var fileName = $("#file").val();
 		  $(".upload-name").val(fileName);
 		});
 	
+
 	</script>
+	
+	
+
 	<footer>
         <div id="foot">
           <nav>

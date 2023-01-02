@@ -8,6 +8,7 @@ public class boardDTO {
 	private String title; // bd_title
 	private String content; // bd_content
 	private String user_ID; // user_ID
+	private String filename; // bd_filename
 	private int viewCnt; // bd_viewcnt
 	private LocalDateTime regDate; // bd_regdate
 	
@@ -18,16 +19,29 @@ public class boardDTO {
 
 	
 
-	public boardDTO(int num, String title, String content, String user_ID, int viewCnt, LocalDateTime regDate) {
+	public boardDTO(int num, String title, String content, String user_ID, String filename, int viewCnt, LocalDateTime regDate) {
 		super();
 		this.num = num;
 		this.title = title;
 		this.content = content;
 		this.user_ID = user_ID;
+		this.filename = filename;
 		this.viewCnt = viewCnt;
 		this.regDate = regDate;
 		
 	}
+
+	public String getFilename() {
+		return filename;
+	}
+
+
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
+
 
 	public int getNum() {
 		return num;

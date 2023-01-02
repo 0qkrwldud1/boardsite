@@ -130,6 +130,8 @@ textarea {
 }
 
 .filebox .upload-name {
+	display: inline-block;
+	vertical-align: middle;
    	margin-top: 5px;
     background-color:#ffffff;
 	border: none;
@@ -141,6 +143,8 @@ textarea {
 } /* 파일 인풋 스타일 변경 */
 
 .filebox label {
+	display: inline-block;
+	vertical-align: middle;
 	padding: 2px;
    	margin-top: 5px;
     background-color:#599bb3;
