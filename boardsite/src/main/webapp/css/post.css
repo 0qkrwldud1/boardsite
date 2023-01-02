@@ -104,13 +104,6 @@ h1 {
 	
 }
 
-#file {
-	margin: 0 auto;
-	margin-top: 10px;
-	width: 50%;
-	display: block;
-}
-
 .view_content {
 	font-size:20px;
 	margin: 0 auto;
@@ -129,26 +122,34 @@ textarea {
 	padding-top: 10px;
 }
 
+.filebox {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	margin-left: 25%;
+}
+
 .filebox .upload-name {
-   	margin: 0 auto;
-	margin-top: 10px;
-	width: 50%;
-	display: block;
-    color: #999999;
-} 
-/* 파일 인풋 스타일 변경 */
+   	margin-top: 5px;
+    background-color:#ffffff;
+	border: none;
+	border-radius: 2px;
+	cursor:pointer;
+	color:#808080;
+	margin-right: 5px;
+    
+} /* 파일 인풋 스타일 변경 */
 
 .filebox label {
-    margin: 0 auto;
-	margin-top: 10px;
-	width: 50%;
-	display: block;
-    color: #fff;
-    background-color: #599bb3;
-    cursor: pointer;
+	padding: 2px;
+   	margin-top: 5px;
+    background-color:#599bb3;
+	border: none;
+	border-radius: 2px;
+	cursor:pointer;
+	color:#ffffff;
     
-}
-/* 인풋 라벨 스타일 변경 */
+}/* 인풋 라벨 스타일 변경 */
 
 .filebox input[type="file"] {
     position: absolute;
@@ -157,8 +158,9 @@ textarea {
     padding: 0;
     overflow: hidden;
     border: 0;
-}
-/* 기존 디자인 없애기 */
+    
+}/* 기존 디자인 없애기 */
+
 #page_control {
 	margin: 0 auto;
 	width: 50%;
