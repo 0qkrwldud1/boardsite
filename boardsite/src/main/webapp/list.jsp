@@ -1,64 +1,18 @@
-<%@page import="java.sql.ResultSet"%>
+<%@ page import="java.sql.ResultSet"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.beans.*"%>
 <%@ page import="java.util.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-List<boardDTO> boardList = (List<boardDTO>) request.getAttribute("boardList");
-%>
 
-<%
-// 디비에서 전체 글목록을 읽어서 가져오기
-// boardDAO 객체생성
-boardDAO bdao = new boardDAO();
+List<boardDTO> list = (List<boardDTO>) request.getAttribute("list");
+String user_ID = (String) session.getAttribute("user_ID");
+int total_record = ((Integer) request.getAttribute("total_record")).intValue();
+int pageNum = ((Integer) request.getAttribute("pageNum")).intValue();
+int total_page = ((Integer) request.getAttribute("total_page")).intValue();
+int LISTCOUNT = ((Integer) request.getAttribute("LISTCOUNT")).intValue();
 
-// 디비에 글이 있는지 확인 후 있으면 글 모두 가져오기,없으면 가져오지않기 : getboardCount()
-int cnt = bdao.getboardCount();
-
-// 페이징처리
-// 한 페이지에서 보여줄 글의 개수 설정
-int pageSize = 10;
-
-// 지금 내가 몇페이지에 있는 확인
-String pageNum = request.getParameter("pageNum");
-
-// 페이지번호정보가 없을 경우 내가 보는 페이지가 첫페이지가 되도록
-if (pageNum == null) {
-		pageNum = "1";
-}
-
-// 시작행번호계산
-// 10개씩 컬럼 나누고 2페이지에서 시작행이 11이되고 3페이지에서 시작행이 21이 되게끔 만들기
-int currentPage = Integer.parseInt(pageNum); // String을 integer로 변환
-int startRow = (currentPage - 1) * pageSize + 1;
-//currentPage가 2인경우, (2-1)x10+1 = 11
-//currentPage가 3인경우, (3-1)x10+1 = 21
-
-// 끝행번호계산
-
-
-
-int endRow= currentPage * pageSize; 
-//currentPage가 2인경우, 2*10 = 20
-//currentPage가 3인경우, 3*10 = 30
-
-// 게시판 글의 수를 화면에 데이터 출력
-// 게시판 총 글의 수 : cnt개
-
-// getBoardList() 메서드생성
-
-/* 오류
-System.out.println(bdao.getboardList());
-boardList = null;
-
-if(cnt != 0) {
-	boardList = bdao.getboardList(startRow, pageSize);
-}
-*/
-
-%>
-<%
-	String user_ID = (String) session.getAttribute("user_ID");
 %>
 
 <!DOCTYPE html>
@@ -96,7 +50,13 @@ if(cnt != 0) {
    	
    	
     <hr><br>
+    
+    <div class = "total">
+	<button class= "btn" ><b>total <%=total_record%></b></button>
+   	</div>
+   
 	<div id = "list_main">
+	
 	<table>
 		<tr>
 			<th>no.</th>
@@ -105,85 +65,76 @@ if(cnt != 0) {
 			<th>View</th>
 			<th>Post</th>
 		</tr>
+		<!--  for(boardDTO bdto : boardList){ 
+			  boardDTO board = (boardDTO) list.get(j);
+		-->
 		
 		<%
-		if (boardList != null) {
-		for(boardDTO bdto : boardList){
-			
-			
+		if (list != null) {
+			for (boardDTO board : list) {
+				
 		%>
 		<tr>
-			<td><%=bdto.getNum()%></td>
-			<td class = "tdd"><a href="view.do?num=<%=bdto.getNum()%>&pageNum=<%=pageNum%>">
-			<%=bdto.getTitle()%></a></td>
-			<td><%=bdto.getUser_ID()%></td>
-			<td><%=bdto.getViewCnt()%></td>
-			<td><%=bdto.getRegDateTime()%></td>
+			<td><%=board.getNum()%></td>
+			<td class = "tdd"><a href="view.do?num=<%=board.getNum()%>&pageNum=<%=pageNum%>">
+			<%=board.getTitle()%></a></td>
+			<td><%=board.getUser_ID()%></td>
+			<td><%=board.getViewCnt()%></td>
+			<td><%=board.getRegDateTime()%></td>
+			
 		</tr>
 		<%
 			}
-		}
+			}			
 		%>
 	</table>
 	<br>
 	</div> 
+	
+			<form action="<c:url value="./list.do"/>" method="post">
+				<div>
+ 					<table id = "search_table">
+						<tr>
+							<td id = "search_table">&nbsp;&nbsp; 
+							<select name="items" class="txt">
+								<option value="bd_title">제목에서</option>
+								<option value="bd_content">본문에서</option>
+								<option value="user_ID">글쓴이에서</option>
+							</select> 
+								<input name="text" type="text" /> 
+								<input type="submit" id="btnAdd" class="btn btn-primary " value="검색 " />
+							</td>
+							
+						</tr>
+					</table>
+				</div>
+			</form>
+	   	
+	
 	<div class = "btn_area">
 	<button class= "btn" onclick="location.href='write.do'" onclick="checkForm(); return false;">Publish</button>
    	</div>
-   	
-   	
-   	<div id = "page_control">
-   		<% if(cnt != 0) { 
-   			// cnt는 전체 글 갯수
-   			// 페이지갯수처리
-   			//전체 페이지 수 계산
-   			int pageCount = cnt / pageSize + (cnt%pageSize == 0? 0: 1);
-   			
-   			//화면에 보여줄 페이지번호의 갯수 (페이지블럭)
-   			int pageBlock = 3; //페이지에 10개 페이지갯수 보여줌
-   			
-   			//한 페이지에 보여줄 페이지 블럭 시작번호 계산
-   			int startPage = ((currentPage-1)/ pageBlock) * pageBlock + 1;
-   			
-   			//한 페이지에 보여줄 페이지 블럭 끝 번호 계산
-   			int endPage = startPage + pageBlock - 1;
-   			if(endPage > pageCount) {  
-   					endPage = pageCount;
-   		 	} 
-   		// 이전 페이지
-   		%>
-   		
-   		<% if (startPage > pageBlock) { %>
-   				
-   				<a href = "list.do?pageNum=<%=startPage-pageBlock%>"> prev </a>
-   				
-	   <% } %>
-   		
-	   <% 	 for (int i=startPage; i<= endPage; i++) { %>
-	   		 	
-	   			<a href = "list.do?pageNum=<%=i %>"> <%=i %> </a>
-	   			
-	  	<% } %>
-	   	
-	  	<% 	 if (endPage<pageCount) { %>
-	  		 	
-	   			<a href = "list.do?pageNum=<%=startPage+pageBlock %>"> next </a>
-	   	<% } %>
-	   	
-	
-	<%
-	} 
-	
-	%>
-	   	
-		</div>   	
-	   	
-	   	
-	   	
+   	<div align="center">
+				<c:set var="pageNum" value="<%=pageNum%>" />
+				<c:forEach var="i" begin="1" end="<%=total_page%>">
+					<a href="<c:url value="./list.do?pageNum=${i}" /> ">
+						<c:choose>
+							<c:when test="${pageNum==i}">
+								<font color='white'><b> [${i}]</b></font>
+							</c:when>
+							<c:otherwise>
+								<font color='white'> [${i}]</font>
+
+							</c:otherwise>
+						</c:choose>
+					</a>
+				</c:forEach>
+			</div>
+			
+	   	  
    
    	</main>		
-   		
-   	<script type="text/javascript">
+   	<script >
 	function checkForm() {	
 		if (${user_ID==null}) {
 			alert("로그인 해주세요.");
@@ -193,7 +144,7 @@ if(cnt != 0) {
 		location.href = "./BoardWriteForm.do?id=<%=user_ID%>"
 	}
 	</script>
-   		
+
      <footer>
         <div id="foot">
           <nav>

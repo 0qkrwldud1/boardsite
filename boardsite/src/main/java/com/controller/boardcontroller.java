@@ -21,26 +21,26 @@ import com.command.WriteCommand;
 @WebServlet("*.do")
 public class boardcontroller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	public static final int LISTCOUNT = 10;
     
     public boardcontroller() {
         super();
         
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException {
 		actionDo(request, response);
-		
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		actionDo(request, response); 
+		actionDo(request, response);
 	}
 	
 	protected void actionDo(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
+		
 		request.setCharacterEncoding("UTF-8");
 		
 		Command command = null;	// 어떠한 로직을 수행할지
@@ -50,6 +50,7 @@ public class boardcontroller extends HttpServlet {
 		String uri = request.getRequestURI();
 		String conPath = request.getContextPath();
 		String com = uri.substring(conPath.length());
+		
 		
 		switch(com) {
 		case "/list.do":
@@ -91,9 +92,10 @@ public class boardcontroller extends HttpServlet {
 		if (viewPage != null) {
 			RequestDispatcher dispatcher = 
 					request.getRequestDispatcher(viewPage);
-			dispatcher.forward(request, response); // "/WEB-INF/views/board/"
+			dispatcher.forward(request, response);
 		}
 	}
+
 
 }
 

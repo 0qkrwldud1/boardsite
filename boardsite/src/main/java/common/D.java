@@ -35,8 +35,6 @@ public class D {
 			"SELECT bd_num num, bd_title title, bd_content content, user_ID user_ID,"
 			+ "bd_viewcnt viewcnt, bd_regdate regdate " + "FROM board ORDER BY bd_num DESC ";
 	
-	public static final String SQL_BOARD_COUNT =
-			"SELECT COUNT(*) FROM board";
 	
 	public static final String SQL_BOARD_LIST =
 			"SELECT * FROM board ORDER BY bd_num DESC";

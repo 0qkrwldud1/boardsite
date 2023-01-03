@@ -42,11 +42,21 @@ th:first-child, td:first-child {
     border-left: none;
   }
   
+#search_table {
+	font-family: 'IBM Plex Sans KR', sans-serif;
+   
+    background: none;
+    margin-left: 15%;
+}
  
 h1 {
 	color: wihte;
 	text-align: center;
 	
+}
+
+.total {
+	margin-left:81%;
 }
 
 .btn {
@@ -194,8 +204,8 @@ textarea {
 }
 
 #list_main{
-	margin-top: 5%;
-	margin-bottom: 5%;
+	margin-top: 1%;
+	margin-bottom: 1%;
 }
 
 #grid_header{
