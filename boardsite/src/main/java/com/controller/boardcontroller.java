@@ -16,6 +16,7 @@ import com.command.SelectCommand;
 import com.command.UpdateCommand;
 import com.command.ViewCommand;
 import com.command.WriteCommand;
+import com.command.WriteCommand2;
 
 
 @WebServlet("*.do")

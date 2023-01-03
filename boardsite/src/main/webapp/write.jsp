@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <title>write</title>
 <link rel="stylesheet" href="css/post.css" >
-<script src="js/upload.js"></script> 
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+
 </head>
 <body>
 	<jsp:include page="menu_post.jsp" />
@@ -30,11 +33,11 @@
           </div>
      </header>
 -->	
-	
+	<!-- enctype="multipart/form-data" -->
 	<hr>
 	
-	<form name="frm" action="<%=request.getContextPath() %>writeOk.do" method="post" 
-		onsubmit="return chkSubmit()" enctype="multipart/form-data">
+	<form name="frm" action="writeOk.do" method="post" 
+		onsubmit="return chkSubmit()" >
 		<div id = "write_main">
 			<div class = "container">
 				<div class = "ti_list">
@@ -54,14 +57,29 @@
 			</div>
 			
 			<!-- input file -> css 적용 -->
+			<!-- 자바스크립트 함수를 이용해 버튼 클릭 시, 아래에 HTML append 기능으로 뷰에 추가하는 방법. -->
+			
 			<div class="filebox">
-			    <input class="upload-name" value="첨부파일" placeholder="filename">
+			    <input class="upload-name" value="첨부파일" 
+			    placeholder="filename" onClick="addFile()"/>
 			    <label for="file">Upload</label> 
-			    <input type="file" id="file" >
-			    
+			    <input type="file" id="file" name="filename" multiple>
+			    <script>
+			    	$("#file").on('change',function(){
+			    	  var fileName = $("#file").val();
+			    	  $(".upload-name").val(fileName);
+			    	});
+			    </script>
 			</div>
-		
+			 
 		</div>
+		
+		<!-- 파일 하나만 추가 -->
+		<!-- <input type="file" id="file" > -->
+		
+		<!-- 파일 선택 화면에서 이미지를 여러개 선택하는 방법. -->
+		<!-- 이미지 파일 추가: <input type="file"  id="uploads" name="uploads" multiple> -->
+		
 		<hr>
 		<div class = "btn_area">
 			<span>
@@ -96,26 +114,30 @@
 		}
 	</script>
 	
+	
 	<script >
 	function onTestChange() {
 	    var key = window.event.keyCode;
 
 	    // If the user has pressed enter
 	    if (key === 13) {
-	        document.getElementById("con").value = document.getElementById("con").value + "\n*";
+	        document.getElementById("con").value = 
+	        	document.getElementById("con").value + "\n";
 	        return false;
 	    }
 	    else {
 	        return true;
 	    }
-	}	
+	}	 
 	
-	$("#file").on('change',function(){
-		  var fileName = $("#file").val();
-		  $(".upload-name").val(fileName);
-		});
 	
-
+	/* 파일첨부 추가하는 함수 */
+	 	var cnt=1;
+	
+	  	function addFile(){
+		  $("#d_file").append("<br>"+"<input type='file' name='file"+cnt+"' />");
+		  cnt++;
+	  }  
 	</script>
 	
 	

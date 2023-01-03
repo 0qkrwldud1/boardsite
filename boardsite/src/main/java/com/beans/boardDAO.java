@@ -86,6 +86,7 @@ public class boardDAO {
 	}// db에 있는 글 개수 확인하는 메서드 
 	
 	/*
+	 * 리스트만 만드는 메서드
 	private List<boardDTO> buildList(ResultSet rs) throws SQLException {
 			List<boardDTO> list = new ArrayList<>();
 			
@@ -112,7 +113,7 @@ public class boardDAO {
 	}
 	 */
 	
-	//board  테이블의 레코드 가져오기 -> 페이징처리하는 부분.
+		//board  테이블의 레코드 가져오기 -> 페이징처리하는 부분.
 		public ArrayList<boardDTO> getboardList(int page, int limit, 
 				String items, String text)  {
 			
@@ -185,7 +186,7 @@ public class boardDAO {
 		
 	public List<boardDTO> get() throws SQLException {
 		List<boardDTO> list = null;			
-			// 데이터베이스에 저장된 모든 정보를 불러와 ArrayList에 저장하는 기능을 구현.
+		// 데이터베이스에 저장된 모든 정보를 불러와 ArrayList에 저장하는 기능을 구현.
 
 		try {
 				pstmt = conn.prepareStatement(D.SQL_BOARD_GET_LIST);
@@ -195,7 +196,7 @@ public class boardDAO {
 				close();
 		}
 		return list;
-	}		// 데이터베이스에서 가져온 ResultSet에 담긴 정보들을 BookDTO 타입인 List로 저장하는 메서드.
+	}	// 데이터베이스에서 가져온 ResultSet에 담긴 정보들을 BookDTO 타입인 List로 저장하는 메서드.
 	
 	
 	// 글 쓰기
@@ -239,7 +240,7 @@ public class boardDAO {
 	}
 
 	
-	//이미지를 등록하는 메서드. 
+		//이미지를 등록하는 메서드. 
 		public void insertImage(ArrayList<FimageDTO> fileLists)  {
 
 			Connection conn = null;
@@ -247,14 +248,17 @@ public class boardDAO {
 			String sql;
 			
 			try {
+				Class.forName(D.DRIVER);
 				conn = DriverManager.getConnection(D.URL, D.USERID, D.USERPW);
+				
 				for(int i=0; i<fileLists.size(); i++) {
 					FimageDTO fimageDTO = fileLists.get(i);
 //					String fileName = fileImageDTO.getFileName();
 					sql = "insert into board_images values(?, ?, ?, ?)";
 					
 					//동적 쿼리에 쿼리 담기.
-					pstmt = conn.prepareStatement(sql);
+					pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE,
+							ResultSet.CONCUR_UPDATABLE);
 					
 					// 동적 쿼리 객체를 이용해서, 해당 디비에 각 항목의 값을 넣는 과정. 
 					//fnum , fileName, regist_day, num
@@ -275,7 +279,7 @@ public class boardDAO {
 				}
 				
 			} catch (Exception ex) {
-				System.out.println("insertImage()  : " + ex);
+				System.out.println("insertImage() 에러: " + ex);
 			} finally {
 				try {
 					// 역순으로 디비에 연결할 때 사용 했던 객체를 반납함. 
@@ -332,7 +336,7 @@ public class boardDAO {
 		return boardList;
 	}
 	
-	// 매개변수x
+	// 매개변수없는 리스트 만드는 메서드
 	public List<boardDTO> getboardList() throws SQLException{
 		//가변길이 배열 생성
 		List<boardDTO> boardList = new ArrayList<>(); 
@@ -408,7 +412,7 @@ public class boardDAO {
 			return boardList;
 		}//getBoardcontent 닫기
 	
-// getBoardList(int startRow, int pageSize) 오버로딩 메서드만들고 sql구문 변경하기.
+	// getBoardList(int startRow, int pageSize) 오버로딩 메서드만들고 sql구문 변경하기.
 	public List<boardDTO> getboardList(int startRow, int pageSize) throws SQLException {
 		
 		List<boardDTO> boardList = new ArrayList<>();
@@ -443,10 +447,9 @@ public class boardDAO {
 			close();
 		}
 		return boardList;
-	}
-
-// getboardlist 수정중
+	}	// getboardlist 수정중
 	
+	// 글 수정하기
 	public int update(int num, String title, String content, String user_ID) throws SQLException {
 		int cnt = 0;
 		
@@ -464,6 +467,7 @@ public class boardDAO {
 		return cnt;
 	}
 	
+	// 글 삭제하기
 	public int deleteByNum(int num) throws SQLException {
 		int cnt = 0;
 			
