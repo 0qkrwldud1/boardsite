@@ -37,6 +37,7 @@ if (boardList == null || boardList.size() == 0) {
 </head>
 <body>
 <jsp:include page="menu_post.jsp" />
+
 <!--  
 	<header>
         <div id="grid_header">
@@ -55,44 +56,48 @@ if (boardList == null || boardList.size() == 0) {
             <span class="banddy"> banddy </span><span class="logo_text" style="font-style: italic; color: black; font-size: 15px;"> _ is a space for the group members.</span>
           </div>
      </header>
--->
+     enctype="multipart/form-data"
+     -->
+     
+
 	<h1><%=title %></h1>
 	<hr>
 	
-	<form name="frm" action="<%=request.getContextPath() %>updateOk.do" method="post" 
-		onsubmit="return chkSubmit()" enctype="multipart/form-data">
+	<form name="frm" action="updateOk.do" method="post" 
+		onsubmit="return chkSubmit()" >
 	
 		<input type="hidden" name="num" value="<%=num %>"/>
-		<div class = "container">
-			<div class = "ti_list">
-			<span>
-			<strong>Title</strong> 
-			</span>
-			<span>
-		    <input type="text" name="title" value="<%=title %>"/><br>
-			</span>
+			<div class = "container">
+				<div class = "ti_list">
+					<span>
+						<strong>Title</strong> 
+					</span>
+					<span>
+						<input type="text" name="title" value="<%=title %>"/><br>
+					</span>
+				</div>
+				<div class = "ti_list">
+				<span>
+					<strong>ID</strong>
+				</span>
+				<span>
+					<input type="text" name="user_ID" value="<%=user_ID %>"/><br>
+				</span>
+				</div>
+				<div class = "ti_list">
+				<strong>Post</strong> <%=regDate %><br><br>
+				</div>
 			</div>
-			<div class = "ti_list">
-			<span>
-			<strong>ID</strong>
-			</span>
-			<sapn>
-			<input type="text" name="user_ID" value="<%=user_ID %>"/><br>
-			</sapn>
-			</div>
-			<div class = "ti_list">
-			<strong>Post</strong> <%=regDate %><br><br>
-			</div>
-		</div>
-	<div >
-		
-		<textarea id= "con"  name="content"><%=content %></textarea>
-		<!-- name이 달라서 수정시 디비에 입력x -> content로 변경. -->	
+			
+		<div>
+			<textarea id= "con"  name="content"><%=content %></textarea>
+			<!-- name이 달라서 수정시 디비에 입력x -> content로 변경. -->	
 			
 			<div class="filebox">
 			    <input class="upload-name" value="첨부파일" placeholder="filename">
-			    <label for="file">Upload</label> 
+			   	<label for="file">Upload</label> 
 			    <input type="file" id="file" >
+			    <input class = "up_btn" type="submit" value="Update"/>
 			    <script> $("#file").on('change',function(){
 				   var fileName = $("#file").val();
 				   $(".upload-name").val(fileName);
@@ -100,18 +105,17 @@ if (boardList == null || boardList.size() == 0) {
 			    </script>
 			    
 			</div>
-	</div>	
-	<input id= "file" type="file" name="filename">
-	<input class = "up_btn" type="submit" value="Update"/>
+		</div>	
+		
 	</form>
 	
-			
-	
 	<br><hr><br>
+	
 	<div class = "btn_area">
-	<button class = "btn" onclick="histroy.back()">Back</button>
-	<button class = "btn" onclick="location.href='list.do'">Board List</button>
+		<button class = "btn" onclick="histroy.back()">Back</button>
+		<button class = "btn" onclick="location.href='list.do'">Board List</button>
 	</div>
+	
 	<script>
 	function chkSubmit() {
 		frm = document.forms['frm'];

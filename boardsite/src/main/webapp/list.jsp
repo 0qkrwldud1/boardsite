@@ -108,13 +108,14 @@ int LISTCOUNT = ((Integer) request.getAttribute("LISTCOUNT")).intValue();
 					</tr>
 				</table>
 			</form>
-	   	</div>
+	   		</div>
 	
-	<div class = "btn_area">
-		<button class= "btn" onclick="location.href='write.do'" onclick="checkForm(); return false;">Publish</button>
-   	</div>
-   	
-   	</div>
+			<div class = "btn_area">
+				<button class= "btn" onclick="location.href='write.do'" 
+					onclick="checkForm(); return false;">Publish</button>
+		   	</div>
+   		
+	  </div>
    	
    	<div align="center">
 		<c:set var="pageNum" value="<%=pageNum%>" />

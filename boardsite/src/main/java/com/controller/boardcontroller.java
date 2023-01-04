@@ -23,6 +23,7 @@ import com.command.WriteCommand2;
 public class boardcontroller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static final int LISTCOUNT = 10;
+	public static int boardNum = 0;
     
     public boardcontroller() {
         super();

@@ -45,7 +45,8 @@ public class boardDAO {
 				conn.close();
 	}
 	
-	// 총 게시글 수 카운트
+	// 총 게시글 수 카운트 
+	// 매개변수: items, text
 	public int getboardCount(String items, String text) {
 		
 
@@ -83,10 +84,11 @@ public class boardDAO {
 			}		
 		}		
 		return cnt;
-	}// db에 있는 글 개수 확인하는 메서드 
+	}
 	
 	/*
 	 * 리스트만 만드는 메서드
+	 * 매개변수 ResultSet rs
 	private List<boardDTO> buildList(ResultSet rs) throws SQLException {
 			List<boardDTO> list = new ArrayList<>();
 			
@@ -113,12 +115,10 @@ public class boardDAO {
 	}
 	 */
 	
-		//board  테이블의 레코드 가져오기 -> 페이징처리하는 부분.
+		//board  테이블의 레코드 리스트 가져오기 -> 페이징처리
 		public ArrayList<boardDTO> getboardList(int page, int limit, 
 				String items, String text)  {
 			
-			
-		
 			// page-> 현재 페이지
 			// limit -> 초기에 설정한 현재 페이지에 불러올 갯수.
 			// db에서 불러올 게시글의 총 개수.
@@ -183,9 +183,10 @@ public class boardDAO {
 			return null;
 		}
 		
-	public List<boardDTO> get() throws SQLException {
-		List<boardDTO> list = null;			
-		// 데이터베이스에 저장된 모든 정보를 불러와 ArrayList에 저장하는 기능을 구현.
+		// 보드 레코드 가져오기
+		public List<boardDTO> get() throws SQLException {
+			List<boardDTO> list = null;			
+		
 
 		try {
 				pstmt = conn.prepareStatement(D.SQL_BOARD_GET_LIST);
@@ -198,7 +199,7 @@ public class boardDAO {
 	}	// 데이터베이스에서 가져온 ResultSet에 담긴 정보들을 BookDTO 타입인 List로 저장하는 메서드.
 	
 	
-	// 글 쓰기
+	// 글 쓰기 디비에 insert
 	public int insert(boardDTO dto) throws SQLException {
 		int cnt = 0;
 		
@@ -211,7 +212,7 @@ public class boardDAO {
 		int num;
 		String[] generatedCols = {"bd_num"};
 		
-		// auto_incremenet 값인 num 값을 dto 객체에 담아야 합니다. 
+		// auto_incremenet 값인 num 값을 dto 객체에 담는다.
 		// num 값은 auto_increment 값이므로 prepareStatement() 메서드 사용 시 매개변수를 두 개로 준다.
 		
 		try {
@@ -239,12 +240,14 @@ public class boardDAO {
 	}
 
 	
-		//이미지를 등록하는 메서드. 
+		//이미지를 등록하는 메서드. 매개변수: 파일 이미지들 객체를 담은 컬렉션이 필요함. 
 		public void insertImage(ArrayList<FimageDTO> fileLists)  {
 
+			// FimageDTO 타입의 ArrayList : fileLists
+			
 			Connection conn = null;
 			PreparedStatement pstmt = null;
-			String sql;
+			
 			
 			try {
 				Class.forName(D.DRIVER);
@@ -252,23 +255,26 @@ public class boardDAO {
 				
 				for(int i=0; i<fileLists.size(); i++) {
 					FimageDTO fimageDTO = fileLists.get(i);
-//					String fileName = fileImageDTO.getFileName();
-					sql = "insert into board_images values(?, ?, ?, ?)";
+
+					String sql = "insert into board_images values(?, ?, ?, ?)";
 					
 					//동적 쿼리에 쿼리 담기.
 					pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE,
 							ResultSet.CONCUR_UPDATABLE);
 					
 					// 동적 쿼리 객체를 이용해서, 해당 디비에 각 항목의 값을 넣는 과정. 
-					//fnum , fileName, regist_day, num
+					//fnum , fileName, regDate, num
 					// 해당 멀티 이미지를 반복문으로 여러개를 입력 하는 로직 필요.
 					
 					//getFnum() 자동으로 숫자 증가.
 					pstmt.setInt(1, fimageDTO.getFnum());
+					
 					// 반복문으로 해당 목록에 들어가 있는 파일이름을 하나씩 가져올 계획. 
 					pstmt.setString(2, fimageDTO.getFileName());
+					
 					// 등록하는 날짜 형식은 시스템 날짜및 시간을 사용할 예정. 
 					pstmt.setString(3, fimageDTO.getRegDate());
+					
 					// 부모 게시글을 입력할 예정. 
 					pstmt.setInt(4, fimageDTO.getNum());
 

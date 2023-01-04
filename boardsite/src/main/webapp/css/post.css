@@ -43,9 +43,13 @@ th:first-child, td:first-child {
   }
   
 #search_table {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	
 	font-family: 'IBM Plex Sans KR', sans-serif;
    	background: none;
-    margin-left: 15%;
+    margin-left: 20%;
     border: none;
 }
 
@@ -99,7 +103,7 @@ h1 {
 	font-size:16px;
 	text-decoration:none;
 	margin-top: 5px;
-	margin-left: 15%;
+	margin-left: 1%;
 }
 
 .container {
