@@ -15,13 +15,13 @@ public class ViewCommand implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		List<boardDTO> boardList = null;
+		List<boardDTO> list = null;
 
 		int num = Integer.parseInt(request.getParameter("num"));
 
 		try {
-			boardList = new boardDAO().readByNum(num);
-			request.setAttribute("boardList", boardList);
+			list = new boardDAO().readByNum(num);
+			request.setAttribute("list", list);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

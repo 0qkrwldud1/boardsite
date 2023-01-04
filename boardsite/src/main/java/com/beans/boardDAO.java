@@ -327,24 +327,24 @@ public class boardDAO {
 	
 	// 수정할때 불러옴 선택한 글 상세 읽기
 	public List<boardDTO> getByNum(int num) throws SQLException {
-		List<boardDTO> boardList = null;
+		List<boardDTO> list = null;
 			
 		try {
 			pstmt = conn.prepareStatement(D.SQL_BOARD_GET_BY_NUM);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
-			boardList = getboardList(rs);
+			list = getboardList();
 		} finally {
 			close();
 		}
 			
-		return boardList;
+		return list;
 	}
 	
 	// 매개변수없는 리스트 만드는 메서드
 	public List<boardDTO> getboardList() throws SQLException{
 		//가변길이 배열 생성
-		List<boardDTO> boardList = new ArrayList<>(); 
+		List<boardDTO> list = new ArrayList<>(); 
 
 		/*
 		try {
@@ -367,7 +367,7 @@ public class boardDAO {
 				
 				//가변배열(ArrayList)에 위의 데이터 저장
 				//즉 배열 한칸에 회원 1명의 정보를 저장함.
-				boardList.add(bdto); //업캐스팅
+				list.add(bdto); //업캐스팅
 			}
 		
 		
@@ -376,9 +376,10 @@ public class boardDAO {
 		 * finally { close(); }
 		 */
 		
-		return boardList;
+		return list;
 	}
 	
+	// x
 	// DB에서 게시글 전체 가져오는 메서드 구현
 	// 매개변수 ResultSet rs
 	public List<boardDTO> getboardList(ResultSet rs) throws SQLException{
@@ -417,6 +418,7 @@ public class boardDAO {
 			return boardList;
 		}//getBoardcontent 닫기
 	
+	// x
 	// getBoardList(int startRow, int pageSize) 오버로딩 메서드만들고 sql구문 변경하기.
 	public List<boardDTO> getboardList(int startRow, int pageSize) throws SQLException {
 		
@@ -453,6 +455,7 @@ public class boardDAO {
 		}
 		return boardList;
 	}	// getboardlist 수정중
+	
 	
 	// 글 수정하기
 	public int update(int num, String title, String content, String user_ID) throws SQLException {

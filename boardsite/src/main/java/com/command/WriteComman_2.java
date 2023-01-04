@@ -16,7 +16,7 @@ import com.beans.boardDTO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-public class WriteCommand2 implements Command {
+public class WriteComman_2 implements Command {
 	//다중 이미지 파일 업로드
 
 	@Override

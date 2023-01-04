@@ -4,9 +4,9 @@
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-List<boardDTO> boardList = (List<boardDTO>) request.getAttribute("boardList");
+List<boardDTO> list = (List<boardDTO>) request.getAttribute("list");
 
-if (boardList == null || boardList.size() == 0) {
+if (list == null || list.size() == 0) {
 %>
 <script>
 	
@@ -21,7 +21,7 @@ if (boardList == null || boardList.size() == 0) {
 %>
 
 <%
-	boardDTO dto = boardList.get(0);
+	boardDTO dto = list.get(0);
 	int num = dto.getNum();
 	String title = dto.getTitle();
 	String content = dto.getContent();

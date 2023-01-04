@@ -6,9 +6,9 @@
 <%@ page import="java.util.*"%>
 
 <%
-List<boardDTO> boardList = (List<boardDTO>) request.getAttribute("boardList");
+List<boardDTO> list = (List<boardDTO>) request.getAttribute("list");
 
-if (boardList == null || boardList.size() == 0) {
+if (list == null || list.size() == 0) {
 %>
 <script>
 	alert("해당 정보가 삭제되었거나 존재하지 않습니다.");
@@ -19,12 +19,13 @@ if (boardList == null || boardList.size() == 0) {
 }
 %>
 <%
-	boardDTO dto = boardList.get(0);
-	int num = dto.getNum();
-	String title = dto.getTitle();
-	String content = dto.getContent();
-	String user_ID = dto.getUser_ID();
-	String regDate = dto.getRegDateTime(); 
+	boardDTO board = list.get(0);
+	int num = board.getNum();
+	String title = board.getTitle();
+	String content = board.getContent();
+	String user_ID = board.getUser_ID();
+	int viewCnt = board.getViewCnt();
+	String regDate = board.getRegDateTime(); 
 %>
 
 <!DOCTYPE html>
@@ -34,9 +35,12 @@ if (boardList == null || boardList.size() == 0) {
 <title><%=title %> update</title>
 <link rel="stylesheet" href="css/post.css" >
 <script src="js/upload.js"></script> 
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 </head>
 <body>
 <jsp:include page="menu_post.jsp" />
+
 
 <!--  
 	<header>
@@ -98,6 +102,7 @@ if (boardList == null || boardList.size() == 0) {
 			   	<label for="file">Upload</label> 
 			    <input type="file" id="file" >
 			    <input class = "up_btn" type="submit" value="Update"/>
+			    
 			    <script> $("#file").on('change',function(){
 				   var fileName = $("#file").val();
 				   $(".upload-name").val(fileName);

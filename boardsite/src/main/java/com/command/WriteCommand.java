@@ -13,9 +13,7 @@ public class WriteCommand implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		int cnt = 0;
-		
-
-		
+			
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		 content = content.replaceAll("\r\n","<br>");
@@ -30,7 +28,6 @@ public class WriteCommand implements Command {
 		dto.setContent(content);
 		dto.setUser_ID(user_ID);
 	
-		
 		if (title != null && title.trim().length() > 0) {
 			try {
 				cnt = new boardDAO().insert(dto);
@@ -42,8 +39,15 @@ public class WriteCommand implements Command {
 		request.setAttribute("result", cnt);
 		request.setAttribute("dto", dto); // auto-generated key (num)
 	}	
-		// cnt 값이 1이라면 데이터베이스에 데이터가 제대로 insert가 되었다는 뜻 
+	
+}
+		//cnt 값이 1이라면 데이터베이스에 데이터가 제대로 insert가 되었다는 뜻 
 		// 또한 게시글이 올바르게 등록되었다면 해당 게시글을 view 하는 창으로 바로 넘어갈 것이므로 해당 글의 uid가 필요함. 
 		// dto에 담긴 uid를 사용할 것이므로 dto도 attribute에 set해서 넘겨준다.
+		
+		
+		
 
-}
+		
+		
+
