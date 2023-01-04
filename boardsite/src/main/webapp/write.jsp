@@ -52,11 +52,11 @@
 			
 			<div>
 			
-				<textarea id= "con" name="content" onkeypress="onTestChange();"></textarea>
+				<textarea id= "con" name="content" ></textarea>
 				
 			</div>
 			
-			<!-- input file -> css 적용 -->
+			<!-- input file -> css 적용 / 엔터시 onkeypress="onTestChange();" -->
 			<!-- 자바스크립트 함수를 이용해 버튼 클릭 시, 아래에 HTML append 기능으로 뷰에 추가하는 방법. -->
 			
 			<div class="filebox">
@@ -65,7 +65,9 @@
 			    <label for="file">Upload</label> 
 			    <input type="file" id="file" name="filename" multiple>
 			    <script>
-			    	$("#file").on('change',function(){
+			   		// 파일 첨부시 파일 이름을 보여주는 jquery
+			    	
+			   		$("#file").on('change',function(){
 			    	  var fileName = $("#file").val();
 			    	  $(".upload-name").val(fileName);
 			    	});
@@ -114,8 +116,11 @@
 		}
 	</script>
 	
-	
+	 
 	<script >
+	//엔터키 눌렀을 때 화면에 적용
+	//두칸씩 늘어나서 일단 x
+	
 	function onTestChange() {
 	    var key = window.event.keyCode;
 
@@ -140,7 +145,7 @@
 	  }  
 	</script>
 	
-	
+
 
 	<footer>
         <div id="foot">

@@ -20,7 +20,7 @@ public class WriteCommand implements Command {
 		String content = request.getParameter("content");
 		 content = content.replaceAll("\r\n","<br>");
 		String user_ID = request.getParameter("user_ID");
-		String filename = request.getParameter("filename");
+		
 		
 		// write.jsp에서 입력한 title과 summary, price 값을 가져와 변수에 저장.
 		// boardDTO 객체를 생성하여 가져온 값들을 dto에 set 합니다.
@@ -29,7 +29,7 @@ public class WriteCommand implements Command {
 		dto.setTitle(title);
 		dto.setContent(content);
 		dto.setUser_ID(user_ID);
-		dto.setFilename(filename);
+	
 		
 		if (title != null && title.trim().length() > 0) {
 			try {

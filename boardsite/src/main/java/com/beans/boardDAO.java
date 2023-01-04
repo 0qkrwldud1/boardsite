@@ -154,7 +154,6 @@ public class boardDAO {
 					board.setTitle(rs.getString("bd_title"));
 					board.setContent(rs.getString("bd_content"));
 					board.setUser_ID(rs.getString("user_ID"));
-					board.setFilename(rs.getString("bd_filename"));
 					board.setViewCnt(rs.getInt("bd_viewcnt"));
 					board.setRegDate(rs.getObject("bd_regdate", LocalDateTime.class));
 					list.add(board);
@@ -207,7 +206,7 @@ public class boardDAO {
 		String title = dto.getTitle();
 		String content = dto.getContent();
 		String user_ID = dto.getUser_ID();
-		String filename = dto.getFilename();
+		
 		
 		int num;
 		String[] generatedCols = {"bd_num"};
@@ -221,7 +220,7 @@ public class boardDAO {
 			pstmt.setString(1, title);
 			pstmt.setString(2, content);
 			pstmt.setString(3, user_ID);
-			pstmt.setString(4, filename);
+			
 			
 			cnt = pstmt.executeUpdate();
 			

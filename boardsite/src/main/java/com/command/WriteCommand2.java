@@ -64,14 +64,13 @@ public class WriteCommand2 implements Command {
 				dto.setTitle(multi.getParameter("title"));
 				dto.setContent(multi.getParameter("content"));
 				dto.setUser_ID(multi.getParameter("user_ID"));
-				dto.setFilename(multi.getParameter("filename"));
+				
 				
 				// 콘솔 상에 출력하기(해당 값을 잘 받아 오고 있는지 여부를 확인하는 용도. )
 				System.out.println(multi.getParameter("title"));
 				System.out.println(multi.getParameter("content"));
 				System.out.println(multi.getParameter("user_ID"));
-				System.out.println(multi.getParameter("filename"));
-				
+			
 				cnt = new boardDAO().insert(dto);
 				
 				

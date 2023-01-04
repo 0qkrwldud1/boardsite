@@ -44,11 +44,18 @@ th:first-child, td:first-child {
   
 #search_table {
 	font-family: 'IBM Plex Sans KR', sans-serif;
-   
-    background: none;
+   	background: none;
     margin-left: 15%;
+    border: none;
 }
- 
+
+#search_input {
+	
+	width:500px;
+	margin-right: 5px;
+    margin-left: 5px;
+}
+
 h1 {
 	color: wihte;
 	text-align: center;
@@ -78,7 +85,7 @@ h1 {
 }
 
 .btn_area {
-	margin-left: 15%;
+	margin-left: 25%;
 }
 
 .up_btn {
@@ -101,6 +108,14 @@ h1 {
 	justify-content: flex-start;
 	margin-left: 25%;
 	
+}
+
+.list_container {
+	display: grid;
+    grid-template-columns: 3fr 1fr;
+    align-items: center;
+    justify-items: stretch;
+    margin-left: 50px;
 }
 
 #con{
@@ -134,15 +149,15 @@ textarea {
 
 .filebox {
 	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
-	margin-left: 25%;
+    flex-direction: row;
+    justify-content: center;
+    margin-left: 25%;
+    margin-top: 15px;
 }
 
 .filebox .upload-name {
 	
-	width:200px;
-	height:20px;
+	width:300px;
    	margin-top: 5px;
     background-color:#ffffff;
 	border: none;
@@ -279,4 +294,8 @@ a {
   .header_top{
     padding-left: 0px;
   } 
+  
+  #search_input {
+	width: 200px;  
+  }
 }

@@ -52,7 +52,7 @@ int LISTCOUNT = ((Integer) request.getAttribute("LISTCOUNT")).intValue();
     <hr><br>
     
     <div class = "total">
-	<button class= "btn" ><b>total <%=total_record%></b></button>
+		<button class= "btn" ><b>total <%=total_record%></b></button>
    	</div>
    
 	<div id = "list_main">
@@ -91,62 +91,64 @@ int LISTCOUNT = ((Integer) request.getAttribute("LISTCOUNT")).intValue();
 	<br>
 	</div> 
 	
+	<div class = "list_container">
+		<div class = "search_area">
 			<form action="<c:url value="./list.do"/>" method="post">
-				<div>
- 					<table id = "search_table">
-						<tr>
-							<td id = "search_table">&nbsp;&nbsp; 
-							<select name="items" class="txt">
-								<option value="bd_title">제목에서</option>
-								<option value="bd_content">본문에서</option>
-								<option value="user_ID">글쓴이에서</option>
+ 				<table id = "search_table">
+					<tr id = "search_table">
+						<td id = "search_table">&nbsp;&nbsp; 
+							<select name="items" class="txt" >
+								<option value="bd_title">Title</option>
+								<option value="bd_content">Content</option>
+								<option value="user_ID">User ID</option>
 							</select> 
-								<input name="text" type="text" /> 
-								<input type="submit" id="btnAdd" class="btn btn-primary " value="검색 " />
-							</td>
-							
-						</tr>
-					</table>
-				</div>
+							<input name="text" type="text" id = "search_input"/> 
+							<input type="submit" class= "btn" value="Search " />
+						</td>	
+					</tr>
+				</table>
 			</form>
-	   	
+	   	</div>
 	
 	<div class = "btn_area">
-	<button class= "btn" onclick="location.href='write.do'" onclick="checkForm(); return false;">Publish</button>
+		<button class= "btn" onclick="location.href='write.do'" onclick="checkForm(); return false;">Publish</button>
    	</div>
+   	
+   	</div>
+   	
    	<div align="center">
-				<c:set var="pageNum" value="<%=pageNum%>" />
-				<c:forEach var="i" begin="1" end="<%=total_page%>">
-					<a href="<c:url value="./list.do?pageNum=${i}" /> ">
-						<c:choose>
-							<c:when test="${pageNum==i}">
-								<font color='white'><b> [${i}]</b></font>
-							</c:when>
-							<c:otherwise>
-								<font color='white'> [${i}]</font>
-
-							</c:otherwise>
-						</c:choose>
-					</a>
-				</c:forEach>
-			</div>
+		<c:set var="pageNum" value="<%=pageNum%>" />
+			<c:forEach var="i" begin="1" end="<%=total_page%>">
+				<a href="<c:url value="./list.do?pageNum=${i}" /> ">
+					<c:choose>
+						<c:when test="${pageNum==i}">
+							<font color='white'><b> [${i}]</b></font>
+						</c:when>
+						<c:otherwise>
+							<font color='white'> [${i}]</font>
+						</c:otherwise>
+					</c:choose>
+				</a>
+			</c:forEach>
+	</div>
 			
 	   	  
    
    	</main>		
+   
    	<script >
-	function checkForm() {	
-		if (${user_ID==null}) {
-			alert("로그인 해주세요.");
-			return false;
+		function checkForm() {	
+			if (${user_ID==null}) {
+				alert("로그인 해주세요.");
+				return false;
+			}
+	
+			location.href = "./BoardWriteForm.do?id=<%=user_ID%>"
 		}
-
-		location.href = "./BoardWriteForm.do?id=<%=user_ID%>"
-	}
 	</script>
 
-     <footer>
-        <div id="foot">
+    <footer>
+       <div id="foot">
           <nav>
             <a href="https://band.us/band/89389707?referrer=" target="_blank">band </a> |
             <a href="https://github.com/0qkrwldud1/web_wldud.git" target="_blank">github</a> 
@@ -156,8 +158,8 @@ int LISTCOUNT = ((Integer) request.getAttribute("LISTCOUNT")).intValue();
             <span>e-mail : 0qkrwldud1@naver.com</span><br/>
             <span>© 2022 Copyright : 0qkrwldud1. All Rights Reserved.</span><br/>
           </p>
-        </div>
-      </footer>
+       </div>
+     </footer>
     
   </body>
   
