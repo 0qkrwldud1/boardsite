@@ -30,10 +30,7 @@ if (list == null || list.size() == 0) {
 	String regDate = dto.getRegDateTime();
 	
 %>
-<%
-	// 해당 뷰에 작업 하기 위해서, 컨트롤러에서 설정한 파일 이미지들 전체를 담는 컬렉션을 가져오는 역할. 
-	ArrayList<FimageDTO> fileLists = (ArrayList<FimageDTO>)request.getAttribute("fileLists");
-%>
+
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -85,25 +82,8 @@ if (list == null || list.size() == 0) {
 	<%=content%>
 	</div>
 	
-	<!-- 반복문으로 컬렉션에 있는 파일 이미지 객체를 하나씩 꺼내서 가져오는 작업. -->
-	<div class = "images">
-	 
-			<% for (int i = 0; i < fileLists.size(); i++) {
-				FimageDTO fimageDTO = new FimageDTO();
-				fimageDTO = fileLists.get(i);
-				
-				String image = fimageDTO.getFileName();
-				
-				%>
-				
-				<img src="../resources/board_images/<%= image %>" style="width: 70%">
-				
-				<%= image %>
-				
-				<%
-				}
-				%>
-	</div>
+	
+	
 	
 	<br><hr><br>
 	

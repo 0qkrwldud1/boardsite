@@ -64,9 +64,10 @@
 			<!-- 자바스크립트 함수를 이용해 버튼 클릭 시, 아래에 HTML append 기능으로 뷰에 추가하는 방법. -->
 			
 			<div class="filebox">
-			    <input class="upload-name" value="첨부파일" placeholder="filename" >
+			    <input class="upload-name" value="첨부파일" 
+			    placeholder="filename" onClick="addFile()"/>
 			    <label for="file">Upload</label> 
-			    <input type="file" id="file" name="fileName" onClick="addFile()"/>
+			    <input type="file" id="file" name="fileName" multiple>
 			    <script>
 			   		// 파일 첨부시 파일 이름을 보여주는 jquery
 			    	
@@ -80,12 +81,7 @@
 		</div>
 		
 			<!-- 파일 하나만 추가 -->
-			<!-- 
-				자바스크립트 함수를 이용해 버튼 클릭 시, 아래에 HTML append 기능으로 뷰에 추가하는 방법. 
-				<input type="button" value="파일 추가" onClick="addFile()"/>
-			-->
-			
-			<div id="d_file"></div>
+			<!-- <input type="file" id="file" > -->
 			
 			<!-- 파일 선택 화면에서 이미지를 여러개 선택하는 방법. -->
 			<!-- 이미지 파일 추가: <input type="file"  id="uploads" name="uploads" multiple> -->
@@ -144,9 +140,8 @@
 	 		var cnt=1;
 	
 	  	function addFile(){
-		  
-	  		$("#d_file").append("<br>"+"<input type='file' name='fileName"+cnt+"' />");
-		  	cnt++;
+		  $("#d_file").append("<br>"+"<input type='file' name='file"+cnt+"' />");
+		  cnt++;
 	  	}  
 	  	
 	</script>

@@ -200,6 +200,7 @@ public class boardDAO {
 	
 	
 	// 글 쓰기 디비에 insert
+	//boardDTO 타입 매개변수 dto
 	public int insert(boardDTO dto) throws SQLException {
 		int cnt = 0;
 		
@@ -225,6 +226,7 @@ public class boardDAO {
 			
 			cnt = pstmt.executeUpdate();
 			
+			// cnt가 보다 크면 
 			if (cnt > 0) {
 				rs = pstmt.getGeneratedKeys();
 				if (rs.next()) {
@@ -238,7 +240,48 @@ public class boardDAO {
 		
 		return cnt;
 	}
-
+	
+		// board insert -> 
+		// cnt 안쓰고 글등록 
+		public void insertBoard(boardDTO dto)  {
+	
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			try {
+				Class.forName(D.DRIVER);
+				conn = DriverManager.getConnection(D.URL, D.USERID, D.USERPW);		
+	
+				String sql = "insert into board values(?, ?, ?, ?, ?, ?, ?, ?)";
+			
+				//동적 쿼리에 쿼리 담기.
+				pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE,
+						ResultSet.CONCUR_UPDATABLE);
+				
+				// 동적 쿼리 객체를 이용해서, 해당 디비에 각 항목의 값을 넣는 과정. 
+				pstmt.setInt(1, dto.getNum());
+				pstmt.setString(2, dto.getTitle());
+				pstmt.setString(3, dto.getContent());
+				pstmt.setString(4, dto.getUser_ID());
+	
+				// 해당 담은 동적 쿼리 객체를 실행하는 메서드. 
+				// executeUpdate() 호출해서 디비에 저장. 
+				pstmt.executeUpdate();
+				conn.commit();
+				conn.setAutoCommit(true);
+			} catch (Exception ex) {
+				System.out.println("insertBoard() 에러 : " + ex);
+			} finally {
+				try {
+					// 역순으로 디비에 연결할 때 사용 했던 객체를 반납함. 
+					if (pstmt != null) 
+						pstmt.close();				
+					if (conn != null) 
+						conn.close();
+				} catch (Exception ex) {
+					throw new RuntimeException(ex.getMessage());
+				}		
+			}		
+		} 
 	
 		//이미지를 등록하는 메서드. 매개변수: 파일 이미지들 객체를 담은 컬렉션이 필요함. 
 		public void insertImage(ArrayList<FimageDTO> fileLists)  {
