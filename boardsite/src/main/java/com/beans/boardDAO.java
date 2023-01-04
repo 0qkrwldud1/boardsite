@@ -250,8 +250,8 @@ public class boardDAO {
 			try {
 				Class.forName(D.DRIVER);
 				conn = DriverManager.getConnection(D.URL, D.USERID, D.USERPW);		
-	
-				String sql = "insert into board values(?, ?, ?, ?, ?, ?, ?, ?)";
+				conn.setAutoCommit( false );
+				String sql = "insert into board values(?, ?, ?, ?, ?, ?)";
 			
 				//동적 쿼리에 쿼리 담기.
 				pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE,
@@ -262,7 +262,10 @@ public class boardDAO {
 				pstmt.setString(2, dto.getTitle());
 				pstmt.setString(3, dto.getContent());
 				pstmt.setString(4, dto.getUser_ID());
-	
+				pstmt.setInt(5, dto.getViewCnt());
+				pstmt.setObject(6, dto.getRegDate());
+		
+				
 				// 해당 담은 동적 쿼리 객체를 실행하는 메서드. 
 				// executeUpdate() 호출해서 디비에 저장. 
 				pstmt.executeUpdate();
@@ -340,6 +343,160 @@ public class boardDAO {
 				}		
 			}		
 		} 
+		
+		// 상세글에서 해당 이미지 불러오는 메서드.	
+		public ArrayList<FimageDTO> getBoardImageByNum(int num) {
+				
+				// 디비 연결를 위한 세트.
+				Connection conn = null;
+				PreparedStatement pstmt = null;
+				ResultSet rs = null;
+				
+				ArrayList<FimageDTO> fileLists = new ArrayList<FimageDTO>();				
+				// 해당 게시글 번호로 다시 디비에서 조회하는 작업. 
+				String sql = "select * from board_images where bd_num = ? ";
+
+				try {
+					// 임시 담을 객체. 게시글 번호로 인한 하나의 게시글을 담을 임시 객체.
+					
+				
+					Class.forName(D.DRIVER);
+					conn = DriverManager.getConnection(D.URL, D.USERID, D.USERPW);
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setInt(1, num);
+					
+					// 선택된 게시글 번호로 조회된 이미지 여러개를 가져와서. 
+					// 임시 객체에 역할로 담는 작업. 
+					rs = pstmt.executeQuery();
+
+					while (rs.next()) {
+						FimageDTO fileDTO = new FimageDTO();
+						fileDTO.setFnum(rs.getInt("fnum"));
+						fileDTO.setFileName(rs.getString("fileName"));
+						fileDTO.setRedDate("regDate");
+						fileDTO.setNum(rs.getInt("bd_num"));
+						
+						fileLists.add(fileDTO);
+					}
+					System.out.println("fileLists의 갯수 : " + fileLists.size());
+					return fileLists;
+				} catch (Exception ex) {
+					System.out.println("getBoardByNum() 예외 : " + ex);
+				} finally {
+					try {
+						if (rs != null) 
+							rs.close();							
+						if (pstmt != null) 
+							pstmt.close();				
+						if (conn != null) 
+							conn.close();
+					} catch (Exception ex) {
+						throw new RuntimeException(ex.getMessage());
+					}		
+				}
+				return null;
+			}
+		
+		public boardDTO getBoardByNum(int bd_num, int page) {
+			
+			// 디비 연결를 위한 세트.
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+					
+			// 임시 담을 객체. 게시글 번호로 인한 하나의 게시글을 담을 임시 객체.
+			boardDTO dto = null;
+
+			// 해당 게시글 클릭시, 조회수 증가하는 메서드. 
+			updateHit(bd_num);
+			// 해당 게시글 번호로 다시 디비에서 조회하는 작업. 
+			String sql = "select * from board where bd_num = ? ";
+
+			try {
+				Class.forName(D.DRIVER);
+				conn = DriverManager.getConnection(D.URL, D.USERID, D.USERPW);
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, bd_num);
+				
+				// 선택된 게시글 번호로 조회된 게시글 하나를 가져와서. 
+				// 임시 객체에 역으로 담는 작업. 
+				rs = pstmt.executeQuery();
+
+				if (rs.next()) {
+					dto = new boardDTO();
+					dto.setNum(rs.getInt("bd_num"));
+					dto.setTitle(rs.getString("bd_title"));
+					dto.setContent(rs.getString("bd_content"));
+					dto.setUser_ID(rs.getString("user_ID"));
+					dto.setViewCnt(rs.getInt("bd_viewcnt"));
+					dto.setRegDate(rs.getObject("bd_regdate", LocalDateTime.class));
+				}
+				
+				return dto;
+			} catch (Exception ex) {
+				System.out.println("getBoardByNum() 에러 : " + ex);
+			} finally {
+				try {
+					if (rs != null) 
+						rs.close();							
+					if (pstmt != null) 
+						pstmt.close();				
+					if (conn != null) 
+						conn.close();
+				} catch (Exception ex) {
+					throw new RuntimeException(ex.getMessage());
+				}		
+			}
+			return null;
+		}
+		
+		//해당 게시글을 조회 했을 경우, 조회수를 증가하는 메서드. 
+		public void updateHit(int bd_num) {
+
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				Class.forName(D.DRIVER);
+				conn = DriverManager.getConnection(D.URL, D.USERID, D.USERPW);
+
+				// 해당 게시글의 번호에 해당하는 히트(조회수) 조회.
+				String sql = "select bd_viewcnt from board where bd_num = ? ";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, bd_num);
+				rs = pstmt.executeQuery();
+				// 기본값.
+				int viewcnt = 0;
+
+				//해당 결과값(디비에서 불러온 값)에서 해당 히트의 값을 불러와서 + 1 증가.
+				if (rs.next())
+					viewcnt = rs.getInt("bd_viewcnt") + 1;
+			
+				// 조회된 조회수 숫자에 1카운트한 값을 다시 디비에 업데이트 수정하는 작업. 
+				sql = "update board set bd_viewcnt=? where bd_num=?";
+				pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE,
+						ResultSet.CONCUR_UPDATABLE);		
+				pstmt.setInt(1, viewcnt);
+				pstmt.setInt(2, bd_num);
+				
+				pstmt.executeUpdate();
+				
+			} catch (Exception ex) {
+				System.out.println("updateHit() 에러 : " + ex);
+			} finally {
+				try { // 디비연결에 사용했던 자원 반납. 역순. 
+					if (rs != null) 
+						rs.close();							
+					if (pstmt != null) 
+						pstmt.close();				
+					if (conn != null) 
+						conn.close();
+				} catch (Exception ex) {
+					throw new RuntimeException(ex.getMessage());
+				}			
+			}
+		}
 	
 	// 조회수 증가시키고 선택한 글 상세 읽기
 	public List<boardDTO> readByNum(int num) throws SQLException {

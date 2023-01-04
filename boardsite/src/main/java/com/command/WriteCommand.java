@@ -21,7 +21,7 @@ public class WriteCommand implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		int cnt = 0;
+		// int cnt = 0;
 		int boardNum = 0;
 		
 		// 처음에 해당 게시글을 작성시, 이미지 파일을 저장하는 테이블의 부모글이 처음에 없음.
@@ -29,9 +29,9 @@ public class WriteCommand implements Command {
 		// 단점. 서버가 리로드 될때 마다 갱신되어서, 작업이 불편함. -> 해당 테이블을 삭제후 생성을 반복. 
 		// 테이블을 하나 만들어서 따로 분리해서 관리 할수도 있음. . 해당 게시글의 번호만 저장하는 역할.
 		
-		String realFolder = "C:\\Users\\admin\\git\\boardsite\\boardsite\\src\\main\\webapp\\board_images\\"; //웹 어플리케이션상의 절대 경로
+		String realFolder = "C:\\Users\\박지영\\git\\boardsite\\boardsite\\src\\main\\webapp\\board_images\\"; //웹 어플리케이션상의 절대 경로
 		String encType = "utf-8"; //인코딩 타입
-		int maxSize = 10 * 1024 * 1024; //최대 업로드될 파일의 크기 10Mb
+		int maxSize = 100 * 1024 * 1024; //최대 업로드될 파일의 크기 100Mb
 		
 		
 		MultipartRequest multi;
@@ -111,7 +111,10 @@ public class WriteCommand implements Command {
 				//===================================================================
 				
 				// 글만 작성.
-				cnt = new boardDAO().insert(dto);
+				
+				//cnt = new boardDAO().insert(dto);
+				
+				dao.insertBoard(dto);
 				
 				// 해당 이미지를 저장하는 메서드를 만들기.
 				// 매개변수에는 해당 게시글의 번호를 넣을 예정.
@@ -157,7 +160,8 @@ public class WriteCommand implements Command {
 					// MultipartRequest 특징
 					// 해당 객체를 생성하는 순간, 저장 경로에 해당 파일명으로 바로 생성됨. 
 					// 그래서, 생성된 파일명을 제가 원하는 파일명으로 변경하는 작업. 
-					if(!fileName.equals("")) {
+					
+					if("fileName".equals(fileName)) {
 						// fileName : 원본의 파일이름.
 					    // 원본이 업로드된 절대경로와 파일명를 구한다.
 					 
@@ -200,10 +204,10 @@ public class WriteCommand implements Command {
 				System.out.println("boardNum:" + boardNum);
 				}
 				
-				request.setAttribute("result", cnt);
-				request.setAttribute("dto", dto);
+				//request.setAttribute("result", cnt);
+				//request.setAttribute("dto", dto);
 				
-				} catch(SQLException | IOException e) {
+				} catch(IOException e) {
 						e.printStackTrace();
 				}	
 					

@@ -40,8 +40,8 @@
 	<!-- 이미지 업로드 form에 추가 enctype="multipart/form-data" -->
 	<hr>
 	
-	<form name="frm" action="writeOk.do" method="post" 
-		onsubmit="return chkSubmit()" >
+	<form name="frm" action="write.do" method="post" 
+		onsubmit="return chkSubmit()" enctype="multipart/form-data">
 		<div id = "write_main">
 			<div class = "container">
 				<div class = "ti_list">
@@ -83,9 +83,10 @@
 			<!-- 
 				자바스크립트 함수를 이용해 버튼 클릭 시, 아래에 HTML append 기능으로 뷰에 추가하는 방법. 
 				<input type="button" value="파일 추가" onClick="addFile()"/>
+				<div id="d_file"></div>
 			-->
 			
-			<div id="d_file"></div>
+			<input type="file"  id="uploads" name="fileName" multiple>
 			
 			<!-- 파일 선택 화면에서 이미지를 여러개 선택하는 방법. -->
 			<!-- 이미지 파일 추가: <input type="file"  id="uploads" name="uploads" multiple> -->

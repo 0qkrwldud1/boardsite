@@ -4,35 +4,12 @@
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-List<boardDTO> list = (List<boardDTO>) request.getAttribute("list");
-
-if (list == null || list.size() == 0) {
-%>
-<script>
+	boardDTO dto = (boardDTO) request.getAttribute("dto");
 	
-	alert("해당 정보가 삭제되었거나 존재하지 않습니다.");
-	history.back();
-	
-	
-</script>
-<%
-	return;
-}
-%>
-
-<%
-	boardDTO dto = list.get(0);
-	int num = dto.getNum();
-	String title = dto.getTitle();
-	String content = dto.getContent();
-	String user_ID = dto.getUser_ID();
-	int viewCnt = dto.getViewCnt();
-	String regDate = dto.getRegDateTime();
-	
-%>
-<%
 	// 해당 뷰에 작업 하기 위해서, 컨트롤러에서 설정한 파일 이미지들 전체를 담는 컬렉션을 가져오는 역할. 
+	
 	ArrayList<FimageDTO> fileLists = (ArrayList<FimageDTO>)request.getAttribute("fileLists");
+	
 %>
 
 <!DOCTYPE html>
@@ -63,32 +40,29 @@ if (list == null || list.size() == 0) {
           </div>
      </header>
 -->
-	<h1><%=title%></h1>
+	
+	<h1><%=dto.getTitle()%></h1>
 	<hr>
 	<div class = "container">
 	<div class = "ti_list">
-	<strong>Title </strong> <%=title%><br>
+	<strong>Title </strong> <%=dto.getTitle()%><br>
 	</div>
 	<div class = "ti_list">
-	<strong>ID </strong> <%=user_ID%><br>
+	<strong>ID </strong> <%=dto.getUser_ID()%><br>
 	</div>
 	<div class = "ti_list">
-	<strong>View </strong> <%=viewCnt%><br>
+	<strong>View </strong> <%=dto.getViewCnt()%><br>
 	</div>
 	<div class = "ti_list">
-	<strong>Post</strong> <%=regDate%><br><br>
+	<strong>Post</strong> <%=dto.getRegDateTime()%><br><br>
 	</div>
 	
 	</div>
 	
 	<div class = "view_content">
-	<%=content%>
-	</div>
 	
-	<!-- 반복문으로 컬렉션에 있는 파일 이미지 객체를 하나씩 꺼내서 가져오는 작업. -->
-	<div class = "images">
-	 
-			<% for (int i = 0; i < fileLists.size(); i++) {
+	<%=dto.getContent()%>
+	<% for (int i = 0; i < fileLists.size(); i++) {
 				FimageDTO fimageDTO = new FimageDTO();
 				fimageDTO = fileLists.get(i);
 				
@@ -96,22 +70,26 @@ if (list == null || list.size() == 0) {
 				
 				%>
 				
-				<img src="../resources/board_images/<%= image %>" style="width: 70%">
+				<img src="C:/Users/박지영/git/boardsite/boardsite/src/main/webapp/board_images/<%= image %>" style="width: 70%">
 				
 				<%= image %>
 				
 				<%
 				}
 				%>
+	
 	</div>
+	
+	<!-- 반복문으로 컬렉션에 있는 파일 이미지 객체를 하나씩 꺼내서 가져오는 작업. -->
+	
 	
 	<br><hr><br>
 	
 	<div class = "btn_area">
-	<c:set var="user_id" value="<%=user_ID%>" />
+	<c:set var="user_id" value="<%=dto.getUser_ID()%>" />
 	<c:if test="${user_ID == user_id}">
-		<button class = "btn" type="button" onclick="chkDelete(<%=num%>)">Delete</button>
-		<button class = "btn" type="button" onclick="location.href='update.do?num=<%=num%>'">Update</button>
+		<button class = "btn" type="button" onclick="chkDelete(<%=dto.getNum()%>)">Delete</button>
+		<button class = "btn" type="button" onclick="location.href='update.do?num=<%=dto.getNum()%>'">Update</button>
 		<button class = "btn" type="button" onclick="location.href='write.do'">New Post</button>
 	</c:if>
 	<button class = "btn" type="button" onclick="location.href='list.do'">Board List</button>
