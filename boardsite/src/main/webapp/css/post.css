@@ -42,6 +42,20 @@ th:first-child, td:first-child {
     border-left: none;
   }
   
+  #search_category {
+	
+	font-family: 'IBM Plex Sans KR', sans-serif;
+   	background: none;
+  
+    border: none;
+}
+  
+.top_list {
+	display: grid;
+    grid-template-columns: 1fr 1fr;
+	
+}
+ 
 #search_table {
 	display: flex;
 	flex-direction: row;
@@ -67,7 +81,7 @@ h1 {
 }
 
 .total {
-	margin-left:81%;
+	margin-left:60%;
 }
 
 .btn {
@@ -104,6 +118,13 @@ h1 {
 	text-decoration:none;
 	margin-top: 5px;
 	margin-left: 1%;
+}
+
+#drop {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	margin-left: 25%;
 }
 
 .container {
@@ -298,8 +319,23 @@ a {
   .header_top{
     padding-left: 0px;
   } 
-  
-  #search_input {
-	width: 200px;  
-  }
+ 
 }
+
+@media (max-width: 1200px) {
+	#search_table {
+		margin:none;
+		justify-content: center;
+		display: block;
+		
+	}
+	.list_container {
+		diaplay:block;
+	}
+	#search_input 
+	{
+		width: auto;
+	}
+	}
+	
+	

@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -155,7 +154,7 @@ public class boardDAO {
 					board.setContent(rs.getString("bd_content"));
 					board.setUser_ID(rs.getString("user_ID"));
 					board.setViewCnt(rs.getInt("bd_viewcnt"));
-					board.setRegDate(rs.getObject("bd_regdate", LocalDateTime.class));
+					board.setRegDate(rs.getString("bd_regdate"));
 					list.add(board);
 
 					// 인덱스 = 1, 5보다 작고 동시에 인덱스가 게시글의 총 개수보다 작거나 같다면,
@@ -196,7 +195,7 @@ public class boardDAO {
 				close();
 		}
 		return list;
-	}	// 데이터베이스에서 가져온 ResultSet에 담긴 정보들을 BookDTO 타입인 List로 저장하는 메서드.
+		}	// 데이터베이스에서 가져온 ResultSet에 담긴 정보들을 BookDTO 타입인 List로 저장하는 메서드.
 	
 	
 	// 글 쓰기 디비에 insert
@@ -239,7 +238,7 @@ public class boardDAO {
 		}
 		
 		return cnt;
-	}
+		}
 	
 		// board insert -> 
 		// cnt 안쓰고 글등록 
@@ -251,7 +250,7 @@ public class boardDAO {
 				Class.forName(D.DRIVER);
 				conn = DriverManager.getConnection(D.URL, D.USERID, D.USERPW);		
 				conn.setAutoCommit( false );
-				String sql = "insert into board values(?, ?, ?, ?, ?, ?)";
+				String sql = "insert into board values(?, ?, ?, ?, ?, ?, ?)";
 			
 				//동적 쿼리에 쿼리 담기.
 				pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE,
@@ -262,8 +261,9 @@ public class boardDAO {
 				pstmt.setString(2, dto.getTitle());
 				pstmt.setString(3, dto.getContent());
 				pstmt.setString(4, dto.getUser_ID());
-				pstmt.setInt(5, dto.getViewCnt());
-				pstmt.setObject(6, dto.getRegDate());
+				pstmt.setString(5, dto.getCategory());
+				pstmt.setInt(6, dto.getViewCnt());
+				pstmt.setString(7, dto.getRegDate());
 		
 				
 				// 해당 담은 동적 쿼리 객체를 실행하는 메서드. 
@@ -283,8 +283,8 @@ public class boardDAO {
 				} catch (Exception ex) {
 					throw new RuntimeException(ex.getMessage());
 				}		
-			}		
-		} 
+				}		
+			} 
 	
 		//이미지를 등록하는 메서드. 매개변수: 파일 이미지들 객체를 담은 컬렉션이 필요함. 
 		public void insertImage(ArrayList<FimageDTO> fileLists)  {
@@ -329,20 +329,20 @@ public class boardDAO {
 					pstmt.executeUpdate();
 				}
 				
-			} catch (Exception ex) {
-				System.out.println("insertImage() 에러: " + ex);
-			} finally {
+				} catch (Exception ex) {
+					System.out.println("insertImage() 에러: " + ex);
+				} finally {
 				try {
 					// 역순으로 디비에 연결할 때 사용 했던 객체를 반납함. 
 					if (pstmt != null) 
 						pstmt.close();				
 					if (conn != null) 
 						conn.close();
-				} catch (Exception ex) {
+					} catch (Exception ex) {
 					throw new RuntimeException(ex.getMessage());
+					}		
 				}		
-			}		
-		} 
+			} 	
 		
 		// 상세글에서 해당 이미지 불러오는 메서드.	
 		public ArrayList<FimageDTO> getBoardImageByNum(int num) {
@@ -373,17 +373,19 @@ public class boardDAO {
 						FimageDTO fileDTO = new FimageDTO();
 						fileDTO.setFnum(rs.getInt("fnum"));
 						fileDTO.setFileName(rs.getString("fileName"));
-						fileDTO.setRedDate("regDate");
+						fileDTO.setRegDate("regDate");
 						fileDTO.setNum(rs.getInt("bd_num"));
 						
 						fileLists.add(fileDTO);
 					}
 					System.out.println("fileLists의 갯수 : " + fileLists.size());
 					return fileLists;
-				} catch (Exception ex) {
-					System.out.println("getBoardByNum() 예외 : " + ex);
-				} finally {
-					try {
+				
+					} catch (Exception ex) {
+						System.out.println("getBoardByNum() 예외 : " + ex);
+					} finally {
+						try {
+						
 						if (rs != null) 
 							rs.close();							
 						if (pstmt != null) 
@@ -394,10 +396,10 @@ public class boardDAO {
 						throw new RuntimeException(ex.getMessage());
 					}		
 				}
-				return null;
-			}
+					return null;
+				}
 		
-		public boardDTO getBoardByNum(int bd_num, int page) {
+		public boardDTO getBoardByNum(int num, int page) {
 			
 			// 디비 연결를 위한 세트.
 			Connection conn = null;
@@ -408,7 +410,7 @@ public class boardDAO {
 			boardDTO dto = null;
 
 			// 해당 게시글 클릭시, 조회수 증가하는 메서드. 
-			updateHit(bd_num);
+			updateHit(num);
 			// 해당 게시글 번호로 다시 디비에서 조회하는 작업. 
 			String sql = "select * from board where bd_num = ? ";
 
@@ -416,7 +418,7 @@ public class boardDAO {
 				Class.forName(D.DRIVER);
 				conn = DriverManager.getConnection(D.URL, D.USERID, D.USERPW);
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, bd_num);
+				pstmt.setInt(1, num);
 				
 				// 선택된 게시글 번호로 조회된 게시글 하나를 가져와서. 
 				// 임시 객체에 역으로 담는 작업. 
@@ -428,15 +430,16 @@ public class boardDAO {
 					dto.setTitle(rs.getString("bd_title"));
 					dto.setContent(rs.getString("bd_content"));
 					dto.setUser_ID(rs.getString("user_ID"));
+					dto.setCategory(rs.getString("bd_category"));
 					dto.setViewCnt(rs.getInt("bd_viewcnt"));
-					dto.setRegDate(rs.getObject("bd_regdate", LocalDateTime.class));
+					dto.setRegDate(rs.getString("bd_regdate"));
 				}
 				
 				return dto;
-			} catch (Exception ex) {
+				} catch (Exception ex) {
 				System.out.println("getBoardByNum() 에러 : " + ex);
-			} finally {
-				try {
+				} finally {
+					try {
 					if (rs != null) 
 						rs.close();							
 					if (pstmt != null) 
@@ -447,11 +450,11 @@ public class boardDAO {
 					throw new RuntimeException(ex.getMessage());
 				}		
 			}
-			return null;
-		}
+				return null;
+			}
 		
 		//해당 게시글을 조회 했을 경우, 조회수를 증가하는 메서드. 
-		public void updateHit(int bd_num) {
+		public void updateHit(int num) {
 
 			Connection conn = null;
 			PreparedStatement pstmt = null;
@@ -464,7 +467,7 @@ public class boardDAO {
 				// 해당 게시글의 번호에 해당하는 히트(조회수) 조회.
 				String sql = "select bd_viewcnt from board where bd_num = ? ";
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, bd_num);
+				pstmt.setInt(1, num);
 				rs = pstmt.executeQuery();
 				// 기본값.
 				int viewcnt = 0;
@@ -478,14 +481,14 @@ public class boardDAO {
 				pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE,
 						ResultSet.CONCUR_UPDATABLE);		
 				pstmt.setInt(1, viewcnt);
-				pstmt.setInt(2, bd_num);
+				pstmt.setInt(2, num);
 				
 				pstmt.executeUpdate();
 				
-			} catch (Exception ex) {
-				System.out.println("updateHit() 에러 : " + ex);
-			} finally {
-				try { // 디비연결에 사용했던 자원 반납. 역순. 
+				} catch (Exception ex) {
+					System.out.println("updateHit() 에러 : " + ex);
+				} finally {
+					try { // 디비연결에 사용했던 자원 반납. 역순. 
 					if (rs != null) 
 						rs.close();							
 					if (pstmt != null) 
@@ -562,7 +565,7 @@ public class boardDAO {
 				
 				bdto.setUser_ID(rs.getString("user_ID"));
 				bdto.setViewCnt(rs.getInt("viewcnt"));
-				bdto.setRegDate(rs.getObject("regdate", LocalDateTime.class));
+				bdto.setRegDate(rs.getString("regdate"));
 				// 여기까지가 한 행의 데이터를 저장한 것임. while로 모든 행을 반복한다.
 				
 				//가변배열(ArrayList)에 위의 데이터 저장
@@ -601,7 +604,7 @@ public class boardDAO {
 					bdto.setContent(rs.getString("content"));
 					bdto.setUser_ID(rs.getString("user_ID"));
 					bdto.setViewCnt(rs.getInt("viewcnt"));
-					bdto.setRegDate(rs.getObject("regdate", LocalDateTime.class));
+					bdto.setRegDate(rs.getString("regdate"));
 					// 여기까지가 한 행의 데이터를 저장한 것임. while로 모든 행을 반복한다.
 					
 					//가변배열(ArrayList)에 위의 데이터 저장
@@ -639,7 +642,7 @@ public class boardDAO {
 			bdto.setContent(rs.getString("content"));
 			bdto.setUser_ID(rs.getString("user_ID"));
 			bdto.setViewCnt(rs.getInt("viewcnt"));
-			bdto.setRegDate(rs.getObject("regdate", LocalDateTime.class));
+			bdto.setRegDate(rs.getString("regdate"));
 			
 			
 			boardList.add(bdto);
@@ -658,36 +661,68 @@ public class boardDAO {
 	
 	
 	// 글 수정하기
-	public int update(int num, String title, String content, String user_ID) throws SQLException {
-		int cnt = 0;
+	// 수정전 매개변수 -> int num, String title, String content, String user_ID
+	public void update(boardDTO dto)  {
+		// int cnt = 0;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
 		
 		try {
-			pstmt = conn.prepareStatement(D.SQL_BOARD_UPDATE);
-			pstmt.setString(1, title);
-			pstmt.setString(2, content);
-			pstmt.setString(3, user_ID);
-			pstmt.setInt(4, num);
-			cnt = pstmt.executeUpdate();
-		} finally {
-			close();
-		}
+			String sql = "update board set bd_title=?, bd_content=?, user_ID=? where bd_num=?";
 			
-		return cnt;
-	}
+			conn = DriverManager.getConnection(D.URL, D.USERID, D.USERPW);
+			pstmt = conn.prepareStatement(sql);
+			
+			conn.setAutoCommit(false);
+			
+			pstmt.setString(1, dto.getTitle());
+			pstmt.setString(2, dto.getContent());
+			pstmt.setString(3, dto.getUser_ID());
+			pstmt.setInt(4, dto.getNum());
+			pstmt.executeUpdate();
+			
+			conn.commit();
+		} catch (Exception ex) {
+			System.out.println("updateBoard() 에러 : " + ex);
+		} finally {
+			try {										
+				if (pstmt != null) 
+					pstmt.close();				
+				if (conn != null) 
+					conn.close();
+			} catch (Exception ex) {
+				throw new RuntimeException(ex.getMessage());
+			}		
+		}
+	} 
 	
 	// 글 삭제하기
-	public int deleteByNum(int num) throws SQLException {
-		int cnt = 0;
+	public void deleteByNum(int num)  {
+		// int cnt = 0;
+		
+		String sql = "delete from board where bd_num=?";	
 			
 		try {
-			pstmt = conn.prepareStatement(D.SQL_BOARD_DELETE);
+			conn = DriverManager.getConnection(D.URL, D.USERID, D.USERPW);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
-			cnt = pstmt.executeUpdate();
-		} finally {
-			close();
-		}
 		
-		return cnt;
-	}
-	
+			pstmt.executeUpdate();
+		
+		} catch (Exception ex) {
+			System.out.println("deleteBoard() 에러 : " + ex);
+		
+		} finally {
+			try {										
+				if (pstmt != null) 
+					pstmt.close();				
+				if (conn != null) 
+					conn.close();
+			} catch (Exception ex) {
+				throw new RuntimeException(ex.getMessage());
+			}		
+		}
+	}	
 }
+	

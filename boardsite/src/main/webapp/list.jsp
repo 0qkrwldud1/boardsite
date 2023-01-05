@@ -51,9 +51,35 @@ int LISTCOUNT = ((Integer) request.getAttribute("LISTCOUNT")).intValue();
    	
     <hr><br>
     
-    <div class = "total">
-		<button class= "btn" ><b>total <%=total_record%></b></button>
-   	</div>
+    <div class = "top_list">
+    			<div >
+					<form action="<c:url value="./list.do"/>" method="post"
+							style= "margin-left: 15%;">
+		 				<table id = "search_category">
+							<tr id = "search_category">
+								<td id = "search_category">&nbsp;&nbsp; 
+									<select name="items" class="txt">
+										<option value="art">문화/예술</option>
+						                <option value="pet">반려동물</option>
+						                <option value="trip">여행/캠핑</option>
+						                <option value="life">일상/이야가</option>
+						                <option value="study">교육/공부</option>
+						                <option value="meet">친목/모임</option>
+						                <option value="sport">스포츠/레저</option>
+						                <option value="it">IT/컴퓨터</option>
+						                <option value="job">취업/자격증</option>
+									</select> 
+									<input type="submit" class= "btn" value="Search " />
+								</td>	
+							</tr>
+						</table>
+					</form>
+			   	</div>
+			   	
+			   	<div class = "total">
+					<button class= "btn" ><b>total <%=total_record%></b></button>
+				</div>
+	</div>
    
 	<div id = "list_main">
 	
@@ -80,7 +106,7 @@ int LISTCOUNT = ((Integer) request.getAttribute("LISTCOUNT")).intValue();
 			<%=board.getTitle()%></a></td>
 			<td><%=board.getUser_ID()%></td>
 			<td><%=board.getViewCnt()%></td>
-			<td><%=board.getRegDateTime()%></td>
+			<td><%=board.getRegDate()%></td>
 			
 		</tr>
 		<%
@@ -101,6 +127,7 @@ int LISTCOUNT = ((Integer) request.getAttribute("LISTCOUNT")).intValue();
 								<option value="bd_title">Title</option>
 								<option value="bd_content">Content</option>
 								<option value="user_ID">User ID</option>
+								<option value="bd_category">Category</option>
 							</select> 
 							<input name="text" type="text" id = "search_input"/> 
 							<input type="submit" class= "btn" value="Search " />
@@ -109,6 +136,9 @@ int LISTCOUNT = ((Integer) request.getAttribute("LISTCOUNT")).intValue();
 				</table>
 			</form>
 	   		</div>
+	
+					
+			
 	
 			<div class = "btn_area">
 				<button class= "btn" onclick="location.href='write.do'" 

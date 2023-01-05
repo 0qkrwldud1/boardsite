@@ -11,9 +11,11 @@ public class DeleteCommand implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		int cnt = 0;
+		// int cnt = 0;
 		int num = Integer.parseInt(request.getParameter("num"));
+		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		
+		/*
 		try {
 				cnt = new boardDAO().deleteByNum(num);
 		} catch (SQLException e) {
@@ -21,6 +23,12 @@ public class DeleteCommand implements Command {
 		}
 		
 		request.setAttribute("result", cnt);
+		
+		*/
+		
+		boardDAO dao = boardDAO.getInstance();
+		
+		dao.deleteByNum(num);
 	}
 
 }

@@ -22,15 +22,19 @@ public class ListCommand implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
+		int boardNum = boardcontroller.boardNum;
 		int LISTCOUNT = boardcontroller.LISTCOUNT;
 		boardDAO dao = new boardDAO();
 		List<boardDTO> list = new ArrayList<boardDTO>();
 		
 		int pageNum=1;
+		
+		// 목록 게시판 보여줄 갯수 10개.
 		int limit=LISTCOUNT;
 		
 		if(request.getParameter("pageNum")!=null)
 			pageNum=Integer.parseInt(request.getParameter("pageNum"));
+				
 				// 만약 request에 담겨진 페이지 정보가 널이 아니면
 				// parseInt -> 해당문자열을 정수 값으로 변환해서 담는다.
 		String items = request.getParameter("items");
@@ -39,8 +43,11 @@ public class ListCommand implements Command {
 				// 검색할 때 텍스트 사용.
 				// 해당 게시글의 모든 갯수를 가져오는 역할.
 				int total_record = dao.getboardCount(items, text);
+				
+				// 실제적인 페이징 처리가 된 결과를 담을 컬렉션이라 보면 됩니다.
 				list = dao.getboardList(pageNum, limit, items, text);
 				
+				// total_page 선언만 실제 페이지 계산의 아래에 있음.
 				int total_page;
 				
 				// 11/5 -> 2.2
@@ -49,18 +56,21 @@ public class ListCommand implements Command {
 				if (total_record % limit == 0){     
 			     	total_page =total_record/limit;
 			     	Math.floor(total_page);  
-				}
-				else{
-				   total_page =total_record/limit;
-				   double total_page_test =  Math.floor(total_page);
-				   System.out.println("total_page_test의 값:"+ total_page_test);
-				   Math.floor(total_page); 
-				   total_page =  total_page + 1; 
+				
+				} else {
+				  
+					total_page =total_record/limit;
+					double total_page_test =  Math.floor(total_page);
+					System.out.println("total_page_test의 값:"+ total_page_test);
+					Math.floor(total_page); 
+					total_page =  total_page + 1; 
 				}			
+				
 				request.setAttribute("LISTCOUNT", LISTCOUNT);
 		   		request.setAttribute("pageNum", pageNum);		  
 		   		request.setAttribute("total_page", total_page);   
 				request.setAttribute("total_record",total_record); 
 				request.setAttribute("list", list);
+				request.setAttribute("boardNum", boardNum);
 			}
 	}

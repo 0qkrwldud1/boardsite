@@ -3,6 +3,8 @@ package com.command;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.UUID;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.beans.FimageDTO;
 import com.beans.boardDAO;
 import com.beans.boardDTO;
+import com.controller.boardcontroller;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -22,15 +25,18 @@ public class WriteCommand implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		// int cnt = 0;
-		int boardNum = 0;
+		int boardNum = boardcontroller.boardNum;
 		
 		// 처음에 해당 게시글을 작성시, 이미지 파일을 저장하는 테이블의 부모글이 처음에 없음.
 		// 그래서, 임시로 해당 부모글의 갯수를 저장하는 변수를 공유 변수 형식으로 사용. 
 		// 단점. 서버가 리로드 될때 마다 갱신되어서, 작업이 불편함. -> 해당 테이블을 삭제후 생성을 반복. 
 		// 테이블을 하나 만들어서 따로 분리해서 관리 할수도 있음. . 해당 게시글의 번호만 저장하는 역할.
 		
-		String realFolder = "C:\\Users\\박지영\\git\\boardsite\\boardsite\\src\\main\\webapp\\board_images\\"; //웹 어플리케이션상의 절대 경로
+		String realFolder = "C:\\Users\\박지영\\git\\boardsite\\boardsite\\src\\main\\webapp\\board_images\\"; 
+		//웹 어플리케이션상의 절대 경로
+		
 		String encType = "utf-8"; //인코딩 타입
+		
 		int maxSize = 100 * 1024 * 1024; //최대 업로드될 파일의 크기 100Mb
 		
 		
@@ -89,16 +95,26 @@ public class WriteCommand implements Command {
 				// 일반 파일 이미지 업로드를 안하는 게시판에서는 받는 객체를 : request 사용 했다면.
 				// 파일 이미지 업로드 가능한 게시판이므로 :MultipartRequest형식 multi 사용해야함. 
 				
+				
 				dto.setTitle(multi.getParameter("title"));
 				dto.setContent(multi.getParameter("content"));
 				dto.setUser_ID(multi.getParameter("user_ID"));
-				
+				dto.setCategory(multi.getParameter("category"));
 				
 				// 콘솔 상에 출력하기(해당 값을 잘 받아 오고 있는지 여부를 확인하는 용도. )
 				System.out.println(multi.getParameter("title"));
 				System.out.println(multi.getParameter("content"));
 				System.out.println(multi.getParameter("user_ID"));
+				System.out.println(multi.getParameter("category"));
 			
+				java.text.SimpleDateFormat formatter = 
+						new java.text.SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+				String regdate = formatter.format(new java.util.Date());
+				System.out.println(regdate);
+				
+				dto.setRegDate(regdate);
+				
+				
 				//========================================================
 				//파일 이미지를 업로드 하는 부분. Controller 라는 부분에 해당 기능(service) 코드가 섞여 있다. 
 				// 유지보수 및 확장 불편함. -> service 역할 부분을 따로 빼어내서 해당 기능만 있는 파일을 만들기.
@@ -132,6 +148,7 @@ public class WriteCommand implements Command {
 				while (files.hasMoreElements()) {
 					
 					//파일명 중복 막기위해서, 파일명 앞에 붙은 랜덤한 숫자.
+					// 예)4024bf24-4db3-458b-83b5-23399c8f4a72_bread2.jpg
 					UUID uuid = UUID.randomUUID();
 					
 					// 반복문으로 해당파일을 하나씩 담기 위한 임시 객체.
@@ -147,7 +164,7 @@ public class WriteCommand implements Command {
 					String uploadFileName = uuid.toString() + "_" + fileName;
 					
 					fileDTO2.setFileName(uploadFileName);
-					fileDTO2.setRedDate(encType);
+					fileDTO2.setRegDate(regdate);
 					fileDTO2.setNum(boardNum);
 					
 					// 받아온 이미지를 임시 객체인 fileDTO2 에담아서, 여러 객체를 담을 컬렉션에 담는 작업. 
@@ -161,7 +178,9 @@ public class WriteCommand implements Command {
 					// 해당 객체를 생성하는 순간, 저장 경로에 해당 파일명으로 바로 생성됨. 
 					// 그래서, 생성된 파일명을 제가 원하는 파일명으로 변경하는 작업. 
 					
-					if("fileName".equals(fileName)) {
+						// if("fileName".equals(fileName))
+						
+						if(!fileName.equals("fileName")){
 						// fileName : 원본의 파일이름.
 					    // 원본이 업로드된 절대경로와 파일명를 구한다.
 					 
@@ -205,7 +224,8 @@ public class WriteCommand implements Command {
 				}
 				
 				//request.setAttribute("result", cnt);
-				//request.setAttribute("dto", dto);
+				request.setAttribute("dto", dto);
+				
 				
 				} catch(IOException e) {
 						e.printStackTrace();

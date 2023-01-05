@@ -15,7 +15,6 @@ import com.command.ListCommand;
 import com.command.SelectCommand;
 import com.command.UpdateCommand;
 import com.command.ViewCommand;
-import com.command.WriteCommand_ori;
 import com.command.WriteCommand;
 
 
@@ -52,8 +51,7 @@ public class boardcontroller extends HttpServlet {
 		String uri = request.getRequestURI();
 		String conPath = request.getContextPath();
 		String com = uri.substring(conPath.length());
-		
-		
+
 		switch(com) {
 		case "/list.do":
 			command = new ListCommand();
@@ -68,14 +66,14 @@ public class boardcontroller extends HttpServlet {
 		case "/write.do":
 			command =  new WriteCommand();
 			command.execute(request, response);
-			viewPage = "write.jsp";
+			viewPage = "list.do";
 			break;
-		/*
-		 * case "/writeOk.do": 
-		 * command = new WriteCommand(); 
-		 * command.execute(request,response); 
-		 * viewPage = "writeOk.jsp"; break;
-		 */
+		
+	//	  case "/writeOk.do": 
+	//	  command = new WriteCommand(); 
+	//	  command.execute(request,response); 
+	//	  viewPage = "writeOk.jsp"; break;
+		 
 		case "/update.do":
 			command = new SelectCommand();
 			command.execute(request, response);
@@ -84,12 +82,12 @@ public class boardcontroller extends HttpServlet {
 		case "/updateOk.do":
 			command = new UpdateCommand();
 			command.execute(request, response);
-			viewPage = "updateOk.jsp";
+			viewPage = "list.do";
 			break;
 		case "/deleteOk.do":
 			command = new DeleteCommand();
 			command.execute(request, response);
-			viewPage = "deleteOk.jsp";
+			viewPage = "list.do";
 			break;
 		}
 		

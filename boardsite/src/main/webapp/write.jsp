@@ -4,7 +4,10 @@
 <%@ page import="java.io.File" %>
 <%@ page import="java.util.Enumeration" %>
 <%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
+<%@ page import="com.beans.*"%>
+<%@ page import="java.util.*"%>
 <%@ page import="com.oreilly.servlet.MultipartRequest"%>
+
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -14,8 +17,20 @@
 <link rel="stylesheet" href="css/post.css" >
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 </head>
+<script >
+/* 파일첨부 추가하는 함수 */
+	var cnt=1;
+
+	function addFile(){
+
+	$("#d_file").append("<br>"+"<input type='file' name='fileName"+cnt+"' />");
+	cnt++;
+}  
+	
+</script>
 <body>
 	<jsp:include page="menu_post.jsp" />
 <!--  
@@ -51,8 +66,24 @@
 				<div class = "ti_list">
 				ID <input type="text" name="user_ID"/><br><br>
 				</div>
+			
+				
+				<div class= "dropdown">
+			
+					<select name="category" >
+		                <option value="art">문화/예술</option>
+		                <option value="pet">반려동물</option>
+		                <option value="trip">여행/캠핑</option>
+		                <option value="life">일상/이야가</option>
+		                <option value="study">교육/공부</option>
+		                <option value="meet">친목/모임</option>
+		                <option value="sport">스포츠/레저</option>
+		                <option value="it">IT/컴퓨터</option>
+		                <option value="job">취업/자격증</option>
+		            </select>
+			
+				</div>
 			</div>
-		
 			
 			<div>
 			
@@ -60,33 +91,48 @@
 				
 			</div>
 			
-			<!-- input file -> css 적용 / 엔터시 onkeypress="onTestChange();" -->
-			<!-- 자바스크립트 함수를 이용해 버튼 클릭 시, 아래에 HTML append 기능으로 뷰에 추가하는 방법. -->
+			<!-- input file -> css 적용 / 엔터시 onkeypress="onTestChange();" 
+			 <input type="file" id="file" name="fileName" onClick="addFile()"/>
+			-->
+			<!-- 자바스크립트 함수를 이용해 버튼 클릭 시, 아래에 HTML append 기능으로 뷰에 추가하는 방법. 
+			  <script>
+			   		// 파일 첨부시 파일 이름을 보여줌.
+			    	
+			   		$("#uploads").on('change',function(){
+			    	  var fileName = $("#uploads").val();
+			    	  $(".upload-name").val(fileName);
+			    	});
+			    </script>-->
+			
 			
 			<div class="filebox">
 			    <input class="upload-name" value="첨부파일" placeholder="filename" >
-			    <label for="file">Upload</label> 
-			    <input type="file" id="file" name="fileName" onClick="addFile()"/>
+			    <label for="uploads">Upload</label> 
+			    <input type="file" id="uploads" value="파일 추가" onClick="addFile()"name= "fileName"/>
+			    
 			    <script>
-			   		// 파일 첨부시 파일 이름을 보여주는 jquery
+			   		// 파일 첨부시 파일 이름을 보여줌.
 			    	
-			   		$("#file").on('change',function(){
-			    	  var fileName = $("#file").val();
+			   		$("#uploads").on('change',function(){
+			    	  var fileName = $("#uploads").val();
 			    	  $(".upload-name").val(fileName);
 			    	});
 			    </script>
+			  
 			</div>
 			 
 		</div>
 		
-			<!-- 파일 하나만 추가 -->
+			<!-- 파일 하나만 추가 
+			<input type="file"  id="uploads" name="fileName" multiple onClick="addFile()" >
+			-->
 			<!-- 
 				자바스크립트 함수를 이용해 버튼 클릭 시, 아래에 HTML append 기능으로 뷰에 추가하는 방법. 
 				<input type="button" value="파일 추가" onClick="addFile()"/>
 				<div id="d_file"></div>
 			-->
 			
-			<input type="file"  id="uploads" name="fileName" multiple>
+			
 			
 			<!-- 파일 선택 화면에서 이미지를 여러개 선택하는 방법. -->
 			<!-- 이미지 파일 추가: <input type="file"  id="uploads" name="uploads" multiple> -->
@@ -94,7 +140,8 @@
 		<hr>
 		<div class = "btn_area">
 			<span>
-				<input class = "btn" type="submit" value="Publish"/>
+				<button class = "btn" type="submit" value="Publish" 
+				>Publish</button>
 			
 			</span>
 			<span>
@@ -141,14 +188,7 @@
 		    }
 		}	 
 	
-	/* 파일첨부 추가하는 함수 */
-	 		var cnt=1;
 	
-	  	function addFile(){
-		  
-	  		$("#d_file").append("<br>"+"<input type='file' name='fileName"+cnt+"' />");
-		  	cnt++;
-	  	}  
 	  	
 	</script>
 	

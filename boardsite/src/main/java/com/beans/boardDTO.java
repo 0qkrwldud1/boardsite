@@ -1,16 +1,24 @@
 package com.beans;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class boardDTO {
 	private int num; // bd_num
 	private String title; // bd_title
 	private String content; // bd_content
 	private String user_ID; // user_ID
+	private String category; // bd_category
 	private int viewCnt; // bd_viewcnt
-	private LocalDateTime regDate; // bd_regdate
+	private String regDate; // bd_regdate
+	private ArrayList<FimageDTO> fileList;
 	
+	public ArrayList<FimageDTO> getFileList() {
+		return fileList;
+	}
+
+	public void setFileList(ArrayList<FimageDTO> fileList) {
+		this.fileList = fileList;
+	}
 	
 	public boardDTO( ) {
 		super();
@@ -18,7 +26,7 @@ public class boardDTO {
 
 	
 
-	public boardDTO(int num, String title, String content, String user_ID, int viewCnt, LocalDateTime regDate) {
+	public boardDTO(int num, String title, String content, String user_ID, int viewCnt, String regDate) {
 		super();
 		this.num = num;
 		this.title = title;
@@ -27,6 +35,14 @@ public class boardDTO {
 		this.viewCnt = viewCnt;
 		this.regDate = regDate;
 		
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	public int getNum() {
@@ -69,18 +85,19 @@ public class boardDTO {
 		this.viewCnt = viewCnt;
 	}
 
-	public LocalDateTime getRegDate() {
+	public String getRegDate() {
 		return regDate;
 	}
 
-	public void setRegDate(LocalDateTime regDate) {
+	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
 	
+	/*
 	public String getRegDateTime() {
 		if (this.regDate == null) return "";
 		return this.regDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss"));
 	}
-	
+	*/
 	
 }

@@ -10,6 +10,9 @@
 	
 	ArrayList<FimageDTO> fileLists = (ArrayList<FimageDTO>)request.getAttribute("fileLists");
 	
+	int num = ((Integer) request.getAttribute("num")).intValue();
+	int nowpage = ((Integer) request.getAttribute("page")).intValue();
+	
 %>
 
 <!DOCTYPE html>
@@ -54,7 +57,10 @@
 	<strong>View </strong> <%=dto.getViewCnt()%><br>
 	</div>
 	<div class = "ti_list">
-	<strong>Post</strong> <%=dto.getRegDateTime()%><br><br>
+	<strong>Post</strong> <%=dto.getRegDate()%><br><br>
+	</div>
+	<div class = "ti_list">
+	<strong>category</strong> <%=dto.getCategory()%><br><br>
 	</div>
 	
 	</div>
@@ -70,16 +76,25 @@
 				
 				%>
 				
-				<img src="C:/Users/박지영/git/boardsite/boardsite/src/main/webapp/board_images/<%= image %>" style="width: 70%">
-				
-				<%= image %>
+				<img src="C:/Users/박지영/git/boardsite/boardsite/src/main/webapp/board_images/
+			
+				<%= fimageDTO.getFileName()%>" style="width: 20%">
 				
 				<%
 				}
 				%>
 	
 	</div>
+	<div id="d_file"></div>
+	<script>
+	var cnt=1;
 	
+  	function addFile(){
+	  
+  		$("#d_file").append("<br>"+"<input type='file' name='fileName"+cnt+"' />");
+	  	cnt++;
+  	}  
+	</script>
 	<!-- 반복문으로 컬렉션에 있는 파일 이미지 객체를 하나씩 꺼내서 가져오는 작업. -->
 	
 	
@@ -88,8 +103,8 @@
 	<div class = "btn_area">
 	<c:set var="user_id" value="<%=dto.getUser_ID()%>" />
 	<c:if test="${user_ID == user_id}">
-		<button class = "btn" type="button" onclick="chkDelete(<%=dto.getNum()%>)">Delete</button>
-		<button class = "btn" type="button" onclick="location.href='update.do?num=<%=dto.getNum()%>'">Update</button>
+		<button class = "btn" type="button" onclick="chkDelete(<%=dto.getNum()%>&pageNum=<%=nowpage%>)">Delete</button>
+		<button class = "btn" type="button" onclick="location.href='update.do?num=<%=dto.getNum()%>&pageNum=<%=nowpage%>'">Update</button>
 		<button class = "btn" type="button" onclick="location.href='write.do'">New Post</button>
 	</c:if>
 	<button class = "btn" type="button" onclick="location.href='list.do'">Board List</button>
@@ -98,7 +113,7 @@
     function chkDelete(num) {
     	let r = confirm("삭제하시겠습니까?");
         if (r) {
-        	location.href = "deleteOk.do?num=" + num;
+        	location.href = "deleteOk.do?num=<%=dto.getNum()%>&pageNum=<%=nowpage%>" + num;
         }
     }
     </script>

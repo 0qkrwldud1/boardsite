@@ -21,8 +21,8 @@ public class FimageDTO {
 	public String getRegDate() {
 		return regDate;
 	}
-	public void setRedDate(String redDate) {
-		this.regDate = redDate;
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
 	}
 	public int getNum() {
 		return num;

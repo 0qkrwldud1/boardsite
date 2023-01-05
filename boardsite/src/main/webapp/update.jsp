@@ -7,16 +7,6 @@
 
 <%
 List<boardDTO> list = (List<boardDTO>) request.getAttribute("list");
-
-if (list == null || list.size() == 0) {
-%>
-<script>
-	alert("해당 정보가 삭제되었거나 존재하지 않습니다.");
-	history.back();
-</script>
-<%
-	return;
-}
 %>
 <%
 	boardDTO board = list.get(0);
@@ -25,7 +15,8 @@ if (list == null || list.size() == 0) {
 	String content = board.getContent();
 	String user_ID = board.getUser_ID();
 	int viewCnt = board.getViewCnt();
-	String regDate = board.getRegDateTime(); 
+	String regDate = board.getRegDate(); 
+	String category =board.getCategory();
 %>
 
 <!DOCTYPE html>
@@ -90,6 +81,9 @@ if (list == null || list.size() == 0) {
 				</div>
 				<div class = "ti_list">
 				<strong>Post</strong> <%=regDate %><br><br>
+				</div>
+				<div class = "ti_list">
+				<strong>category</strong> <%=category%><br><br>
 				</div>
 			</div>
 			
