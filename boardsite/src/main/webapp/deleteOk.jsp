@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%
 	int num = (Integer)request.getAttribute("num");
-	int pageNum = (Integer)request.getAttribute("pageNum");
+	int nowpage = ((Integer) request.getAttribute("page"));
 %>
 <% 	if (num == 0 ) { %>
 	

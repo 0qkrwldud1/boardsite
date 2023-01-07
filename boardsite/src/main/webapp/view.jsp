@@ -103,17 +103,17 @@
 	<div class = "btn_area">
 	<c:set var="user_id" value="<%=dto.getUser_ID()%>" />
 	<c:if test="${user_ID == user_id}">			
-		<button class = "btn" type="button" onclick="chkDelete(<%=dto.getNum()%>)">Delete</button>
+		<button class = "btn" type="button" onclick="chkDelete(<%=dto.getNum()%>, <%=nowpage%>)">Delete</button>
 		<button class = "btn" type="button" onclick="location.href='update.do?num=<%=dto.getNum()%>&pageNum=<%=nowpage%>'">Update</button>
 		<button class = "btn" type="button" onclick="location.href='write.do'">New Post</button>
 	</c:if>
 	<button class = "btn" type="button" onclick="location.href='list.do'">Board List</button>
     </div>
     <script>
-    function chkDelete(num) {
+    function chkDelete(num, nowpage) {
     	let r = confirm("삭제하시겠습니까?");
         if (r) {
-        	location.href = "deleteOk.do?num=" + num ;
+        	location.href = "deleteOk.do?num=" + num +"&pageNum=" + nowpage;
         }
     }
     </script>

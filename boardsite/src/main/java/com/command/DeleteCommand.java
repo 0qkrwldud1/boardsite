@@ -13,7 +13,7 @@ public class DeleteCommand implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		// int cnt = 0;
 		int num = Integer.parseInt(request.getParameter("num"));
-		
+		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		
 		/*
 		try {
@@ -31,6 +31,7 @@ public class DeleteCommand implements Command {
 		dao.deleteByNum(num);
 		
 		request.setAttribute("num", num);
+		request.setAttribute("page", pageNum);
 		
 		
 	}	

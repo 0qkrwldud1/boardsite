@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -49,7 +50,7 @@
     <article>
       <div id="seach">
         
-          <form class="search-container">
+          <form class="search-container" >
             <input type="text" id="search-bar" placeholder="검색어를 입력하세요.">
             <a href="https://www.btc.ac.kr/"><img class="search-icon" src="pic/search (2).png"></a>
           </form>

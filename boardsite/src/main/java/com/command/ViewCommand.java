@@ -41,13 +41,13 @@ public class ViewCommand implements Command {
 		
 		//콘솔확인.
 		
-	//	 for (int i = 0; i < fileLists.size(); i++) { 
-	//		 
-	//		 FimageDTO ex = fileLists.get(i);
-	//		 String ex2 = ex.getFileName(); 
-	//		 System.out.println("ex2 밖에 반복문 테스트" + ex2); 
-	//		 
-	//	 }
+			for (int i = 0; i < fileLists.size(); i++) { 
+			 
+			 FimageDTO ex = fileLists.get(i);
+			 String ex2 = ex.getFileName(); 
+			 System.out.println("ex2 밖에 반복문 테스트" + ex2); 
+			 
+		 }
 		 
 
 		// 내장객체에 , 선택된 하나의 게시글의 번호인 num
