@@ -103,7 +103,7 @@
 	<div class = "btn_area">
 	<c:set var="user_id" value="<%=dto.getUser_ID()%>" />
 	<c:if test="${user_ID == user_id}">			
-		<button class = "btn" type="button" onclick="chkDelete(<%=dto.getNum()%>&pageNum=<%=nowpage%>)">Delete</button>
+		<button class = "btn" type="button" onclick="chkDelete(<%=dto.getNum()%>)">Delete</button>
 		<button class = "btn" type="button" onclick="location.href='update.do?num=<%=dto.getNum()%>&pageNum=<%=nowpage%>'">Update</button>
 		<button class = "btn" type="button" onclick="location.href='write.do'">New Post</button>
 	</c:if>
