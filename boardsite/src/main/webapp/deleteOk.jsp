@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	int cnt = (Integer)request.getAttribute("result");
+	int num = (Integer)request.getAttribute("num");
+	int pageNum = (Integer)request.getAttribute("pageNum");
 %>
-<% 	if (cnt == 0) { %>
+<% 	if (num == 0 ) { %>
 	
 	<script>
 		alert("삭제 실패");

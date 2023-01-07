@@ -26,7 +26,7 @@
 
 	function addFile(){
 
-	$("#d_file").append("<br>"+"<input type='file' name='fileName"+cnt+"' />");
+	$("#d_file").append("<br>"+"<input type='file' name='fileName" + cnt + "' />");
 	cnt++;
 }  
 	
@@ -55,7 +55,7 @@
 	<!-- 이미지 업로드 form에 추가 enctype="multipart/form-data" -->
 	<hr>
 	
-	<form name="frm" action="write.do" method="post" 
+	<form name="frm" action="writeOk.do" method="post" 
 		onsubmit="return chkSubmit()" enctype="multipart/form-data">
 		<div id = "write_main">
 			<div class = "container">
@@ -172,7 +172,7 @@
 		}
 	
 	//엔터키 눌렀을 때 화면에 적용
-	//두칸씩 늘어나서 일단 x
+	//두칸씩 늘어나서 x
 	
 		function onTestChange() {
 		    var key = window.event.keyCode;

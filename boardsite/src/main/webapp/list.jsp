@@ -58,16 +58,17 @@ int LISTCOUNT = ((Integer) request.getAttribute("LISTCOUNT")).intValue();
 		 				<table id = "search_category">
 							<tr id = "search_category">
 								<td id = "search_category">&nbsp;&nbsp; 
-									<select name="items" class="txt">
-										<option value="art">문화/예술</option>
-						                <option value="pet">반려동물</option>
-						                <option value="trip">여행/캠핑</option>
-						                <option value="life">일상/이야가</option>
-						                <option value="study">교육/공부</option>
-						                <option value="meet">친목/모임</option>
-						                <option value="sport">스포츠/레저</option>
-						                <option value="it">IT/컴퓨터</option>
-						                <option value="job">취업/자격증</option>
+									<select name="items" class="txt" value="${searchVO.items}">
+									<option value="">Please choose a category</option>
+										<option value="art"${param.items eq 'art' ? "selected" : ""}>문화/예술</option>
+						                <option value="pet"${param.items eq 'pet' ? "selected" : ""}>반려동물</option>
+						                <option value="trip"${param.items eq 'trip' ? "selected" : ""}>여행/캠핑</option>
+						                <option value="life"${param.items eq 'life' ? "selected" : ""}>일상/이야기</option>
+						                <option value="study"${param.items eq 'study' ? "selected" : ""}>교육/공부</option>
+						                <option value="meet"${param.items eq 'meet' ? "selected" : ""}>친목/모임</option>
+						                <option value="sport"${param.items eq 'sport' ? "selected" : ""}>스포츠/레저</option>
+						                <option value="it"${param.items eq 'it' ? "selected" : ""}>IT/컴퓨터</option>
+						                <option value="job"${param.items eq 'job' ? "selected" : ""}>취업/자격증</option>
 									</select> 
 									<input type="submit" class= "btn" value="Search " />
 								</td>	
@@ -123,11 +124,12 @@ int LISTCOUNT = ((Integer) request.getAttribute("LISTCOUNT")).intValue();
  				<table id = "search_table">
 					<tr id = "search_table">
 						<td id = "search_table">&nbsp;&nbsp; 
-							<select name="items" class="txt" >
-								<option value="bd_title">Title</option>
-								<option value="bd_content">Content</option>
-								<option value="user_ID">User ID</option>
-								<option value="bd_category">Category</option>
+							<select name="items" class="txt" value="${searchVO.items}">
+								
+								<option value="bd_title"${param.items eq 'bd_title' ? "selected" : ""}>Title</option>
+								<option value="bd_content"${param.items eq 'bd_content' ? "selected" : ""}>Content</option>
+								<option value="user_ID"${param.items eq 'user_ID' ? "selected" : ""}>User ID</option>
+
 							</select> 
 							<input name="text" type="text" id = "search_input"/> 
 							<input type="submit" class= "btn" value="Search " />

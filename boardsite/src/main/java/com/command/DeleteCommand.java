@@ -29,6 +29,10 @@ public class DeleteCommand implements Command {
 		boardDAO dao = boardDAO.getInstance();
 		
 		dao.deleteByNum(num);
-	}
+		
+		request.setAttribute("num", num);
+		request.setAttribute("pageNum", pageNum);
+		
+	}	
 
 }

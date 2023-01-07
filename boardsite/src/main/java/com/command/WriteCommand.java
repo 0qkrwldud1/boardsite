@@ -224,8 +224,8 @@ public class WriteCommand implements Command {
 				}
 				
 				//request.setAttribute("result", cnt);
-				request.setAttribute("dto", dto);
-				
+				//request.setAttribute("dto", dto);
+				request.setAttribute("boardNum", boardNum);
 				
 				} catch(IOException e) {
 						e.printStackTrace();

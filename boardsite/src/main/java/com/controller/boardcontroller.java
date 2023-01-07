@@ -49,8 +49,11 @@ public class boardcontroller extends HttpServlet {
 		
 		// URL로부터 command 분리
 		String uri = request.getRequestURI();
+		System.out.println("uri : " +uri);
 		String conPath = request.getContextPath();
+		System.out.println("conPath : " +conPath);
 		String com = uri.substring(conPath.length());
+		System.out.println("com : " +com);
 
 		switch(com) {
 		case "/list.do":
@@ -64,15 +67,15 @@ public class boardcontroller extends HttpServlet {
 			viewPage = "view.jsp";
 			break;
 		case "/write.do":
-			command =  new WriteCommand();
-			command.execute(request, response);
-			viewPage = "list.do";
+	//		command =  new WriteCommand();
+	//		command.execute(request, response);
+			viewPage = "write.jsp";
 			break;
 		
-	//	  case "/writeOk.do": 
-	//	  command = new WriteCommand(); 
-	//	  command.execute(request,response); 
-	//	  viewPage = "writeOk.jsp"; break;
+		  case "/writeOk.do": 
+		  command = new WriteCommand(); 
+		  command.execute(request,response); 
+		  viewPage = "writeOk.jsp"; break;
 		 
 		case "/update.do":
 			command = new SelectCommand();

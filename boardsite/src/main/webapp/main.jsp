@@ -15,8 +15,12 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
     <script src="js/main.js"></script> 
+ 
 </head>
+
 <body>
+
+
 <jsp:include page="menu_main.jsp" />
 <!--  jsp:include 사용
 <header>
@@ -333,6 +337,6 @@
     </p>
   </div>
 </footer>
-  
+
 </body>
 </html>

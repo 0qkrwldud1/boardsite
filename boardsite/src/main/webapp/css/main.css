@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&display=swap');
 
+
+
 body {
   font-family: 'IBM Plex Sans KR', sans-serif;
   text-rendering: optimizeLegibility;
@@ -8,6 +10,7 @@ body {
        rgb(254, 255, 253) 0%,
        rgb(196, 206, 192) 50%
      );
+ 
 }
 a.btn {
   background: #becebe;

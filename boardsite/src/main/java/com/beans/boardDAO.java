@@ -55,6 +55,10 @@ public class boardDAO {
 		
 		if (items == null && text == null) 
 			sql = "select  count(*) from board";
+		
+		else if (text == null)
+			sql = "select count(*) from board where bd_category = '" + items + "' order by bd_num; ";
+	
 		else 
 			sql =  "select   count(*) from board where " + items + " like '%" + text + "%'";
 		try {	
@@ -133,6 +137,9 @@ public class boardDAO {
 				sql = 	" SELECT  * FROM board ORDER BY bd_num DESC ";
 			
 				// 보드 테이블을 num 기준으로 내림차순으로 정렬.
+			else if (text == null)
+				sql = "select * from board where bd_category = '" + items + "' order by bd_num; ";
+			
 			else
 				sql = "SELECT  * FROM board where " + items + " like '%" + text + "%' ORDER BY bd_num DESC ";
 				// 보드 테이블을 조건내에서 text에 검색한 글자를 가진 text가 있는 칼럼을 내림차순으로 정렬.
