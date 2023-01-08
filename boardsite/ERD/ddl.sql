@@ -5,8 +5,9 @@ CREATE TABLE board(
 	bd_title varchar(45) ,
 	bd_content varchar(200) ,
 	user_ID varchar(45) NOT NULL ,
-	bd_viewcnt int DEFAULT 0 CHECK (bk_viewcnt >= 0) NOT NULL ,
-	bd_regdate datetime DEFAULT now()
+	bd_category varchar(45),
+	bd_viewcnt int DEFAULT 0  NOT NULL ,
+	bd_regdate varchar(45)
 );
 
 create table user(
@@ -17,3 +18,13 @@ create table user(
 	user_Email varchar(45) 
 );
 
+CREATE TABLE board_images (
+       Fnum int not null auto_increment,
+       fileName varchar(100) ,
+       regDate varchar(50),
+	   bd_num int,
+       PRIMARY KEY (Fnum)
+)default CHARSET=utf8;
+
+ALTER TABLE board_images add CONSTRAINT file_fk FOREIGN KEY(bd_num) 
+REFERENCES board (bd_num) ON DELETE CASCADE;
