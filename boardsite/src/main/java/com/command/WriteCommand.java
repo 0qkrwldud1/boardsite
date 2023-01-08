@@ -32,10 +32,10 @@ public class WriteCommand implements Command {
 		// 단점. 서버가 리로드 될때 마다 갱신되어서, 작업이 불편함. -> 해당 테이블을 삭제후 생성을 반복. 
 		// 테이블을 하나 만들어서 따로 분리해서 관리 할수도 있음. . 해당 게시글의 번호만 저장하는 역할.
 		
-		String realFolder = "C:\\Users\\박지영\\git\\boardsite\\boardsite\\src\\main\\webapp\\board_images\\"; 
+		String realFolder = "C:\\Users\\박지영\\git\\boardsite\\boardsite\\src\\main\\webapp\\board_images"; 
 		//웹 어플리케이션상의 절대 경로
 		String encType = "utf-8"; //인코딩 타입
-		int maxSize = 100 * 1024 * 1024; //최대 업로드될 파일의 크기 100Mb
+		int maxSize = 10 * 1024 * 1024; //최대 업로드될 파일의 크기 10Mb
 		
 		
 		MultipartRequest multi;
@@ -65,13 +65,13 @@ public class WriteCommand implements Command {
 				if(test == 0 ) {
 					
 					// 부모 글이 없다 -> 그래서, 기본값을 1로 설정.
-					boardNum = 1;
+					boardcontroller.boardNum = 1;
 				
 				} else {
 					
 					// 부모글이 있고, 해당 파일이미지 테이블이 작성이 된다면.
 					// 해당 부모글의 게시글 번호 카운트를 따라 감. = boardNum
-					boardNum += 1;
+					boardcontroller.boardNum = test + 1;
 				}
 
 				
@@ -163,7 +163,7 @@ public class WriteCommand implements Command {
 					
 					fileDTO2.setFileName(uploadFileName);
 					fileDTO2.setRegDate(regdate);
-					fileDTO2.setNum(boardNum);
+					fileDTO2.setNum(boardcontroller.boardNum);
 					
 					// 받아온 이미지를 임시 객체인 fileDTO2 에담아서, 여러 객체를 담을 컬렉션에 담는 작업. 
 					fileLists.add(fileDTO2);
@@ -176,9 +176,9 @@ public class WriteCommand implements Command {
 					// 해당 객체를 생성하는 순간, 저장 경로에 해당 파일명으로 바로 생성됨. 
 					// 그래서, 생성된 파일명을 제가 원하는 파일명으로 변경하는 작업. 
 					
-						// if("fileName".equals(fileName))
-						
-						if(!fileName.equals("fileName")){
+						// if(!"fileName".equals(fileName))
+						//!fileName.equals("")
+						if(!"fileName".equals(fileName)){
 						// fileName : 원본의 파일이름.
 					    // 원본이 업로드된 절대경로와 파일명를 구한다.
 					 
@@ -218,12 +218,12 @@ public class WriteCommand implements Command {
 				
 				//확인하는 샘플. 
 				//부모글 의 갯수와, 해당 내가 카운트하는 숫자가 일치하는 지 확인 하기 위해서.
-				System.out.println("boardNum:" + boardNum);
+				System.out.println("boardNum:" + boardcontroller.boardNum);
 				}
 				
 				//request.setAttribute("result", cnt);
 				//request.setAttribute("dto", dto);
-				request.setAttribute("boardNum", boardNum);
+				request.setAttribute("boardNum", boardcontroller.boardNum);
 				
 				} catch(IOException e) {
 						e.printStackTrace();

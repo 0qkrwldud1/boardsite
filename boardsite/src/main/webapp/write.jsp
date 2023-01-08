@@ -74,7 +74,7 @@
 		                <option value="art">문화/예술</option>
 		                <option value="pet">반려동물</option>
 		                <option value="trip">여행/캠핑</option>
-		                <option value="life">일상/이야가</option>
+		                <option value="life">일상/이야기</option>
 		                <option value="study">교육/공부</option>
 		                <option value="meet">친목/모임</option>
 		                <option value="sport">스포츠/레저</option>
@@ -108,8 +108,8 @@
 			<div class="filebox">
 			    <input class="upload-name" value="첨부파일" placeholder="filename" >
 			    <label for="uploads">Upload</label> 
-			    <input type="file" id="uploads" value="파일 추가" onClick="addFile()"name= "fileName"/>
-			    
+			    <input type="file" id="uploads" value="파일 추가" onClick="addFile()" name= "fileName"/>
+			   <!--  <div id="d_file"></div> --> 
 			    <script>
 			   		// 파일 첨부시 파일 이름을 보여줌.
 			    	

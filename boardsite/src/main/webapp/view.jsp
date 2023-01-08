@@ -78,23 +78,15 @@
 				
 				<img src="C:/Users/박지영/git/boardsite/boardsite/src/main/webapp/board_images/
 			
-				<%= fimageDTO.getFileName()%>" style="width: 20%">
+				<%= fimageDTO.getFileName()%>" style="width: 50%">
 				
 				<%
 				}
 				%>
 	
 	</div>
-	<div id="d_file"></div>
-	<script>
-	var cnt=1;
 	
-  	function addFile(){
-	  
-  		$("#d_file").append("<br>"+"<input type='file' name='fileName"+cnt+"' />");
-	  	cnt++;
-  	}  
-	</script>
+	
 	<!-- 반복문으로 컬렉션에 있는 파일 이미지 객체를 하나씩 꺼내서 가져오는 작업. -->
 	
 	
