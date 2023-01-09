@@ -109,7 +109,7 @@
 			    <input class="upload-name" value="첨부파일" placeholder="filename" >
 			    <label for="uploads">Upload</label> 
 			    <input type="file" id="uploads" value="파일 추가" onClick="addFile()" name= "fileName"/>
-			   <!--  <div id="d_file"></div> --> 
+			   <!--  <div id="d_file"></div> onClick="addFile()"--> 
 			    <script>
 			   		// 파일 첨부시 파일 이름을 보여줌.
 			    	

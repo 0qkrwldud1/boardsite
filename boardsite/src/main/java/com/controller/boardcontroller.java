@@ -75,7 +75,8 @@ public class boardcontroller extends HttpServlet {
 		  case "/writeOk.do": 
 		  command = new WriteCommand(); 
 		  command.execute(request,response); 
-		  viewPage = "writeOk.jsp"; break;
+		  viewPage = "writeOk.jsp"; 
+		  break;
 		 
 		case "/update.do":
 			command = new SelectCommand();

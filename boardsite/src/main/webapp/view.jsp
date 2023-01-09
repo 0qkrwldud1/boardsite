@@ -76,7 +76,7 @@
 				
 				%>
 				
-				<img src="C:/Users/박지영/git/boardsite/boardsite/src/main/webapp/board_images/
+				<img src="C:/Users/admin/git/boardsite/boardsite/src/main/webapp/board_images/
 			
 				<%= fimageDTO.getFileName()%>" style="width: 50%">
 				

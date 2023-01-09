@@ -32,7 +32,7 @@ public class WriteCommand implements Command {
 		// 단점. 서버가 리로드 될때 마다 갱신되어서, 작업이 불편함. -> 해당 테이블을 삭제후 생성을 반복. 
 		// 테이블을 하나 만들어서 따로 분리해서 관리 할수도 있음. . 해당 게시글의 번호만 저장하는 역할.
 		
-		String realFolder = "C:\\Users\\박지영\\git\\boardsite\\boardsite\\src\\main\\webapp\\board_images"; 
+		String realFolder = "C:\\Users\\admin\\git\\boardsite\\boardsite\\src\\main\\webapp\\board_images"; 
 		//웹 어플리케이션상의 절대 경로
 		String encType = "utf-8"; //인코딩 타입
 		int maxSize = 10 * 1024 * 1024; //최대 업로드될 파일의 크기 10Mb
