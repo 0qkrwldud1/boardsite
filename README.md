@@ -163,13 +163,13 @@ list.do 페이지에서 검색하는 메서드를 실행할 시 페이지가 새
 ## 구현한 게시판
 
 
-<img src="캡처01.png" width="700" height="300"/>
+<img src="캡처_list.PNG" width="700" height="300"/>
 
 
-<img src="캡처02.png" width="700" height="300"/>
+<img src="캡처_view.PNG" width="700" height="300"/>
 
 
-<img src="캡처03.png" width="700" height="300"/>
+<img src="캡처_write.PNG" width="700" height="300"/>
 
 
 <img src="캡처04.png" width="700" height="300"/>
