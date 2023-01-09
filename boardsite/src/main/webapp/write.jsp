@@ -78,7 +78,7 @@
 		                <option value="study">교육/공부</option>
 		                <option value="meet">친목/모임</option>
 		                <option value="sport">스포츠/레저</option>
-		                <option value="it">IT/컴퓨터</option>
+		                <option value="IT">IT/컴퓨터</option>
 		                <option value="job">취업/자격증</option>
 		            </select>
 			

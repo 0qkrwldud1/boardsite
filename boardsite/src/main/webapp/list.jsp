@@ -67,7 +67,7 @@ int LISTCOUNT = ((Integer) request.getAttribute("LISTCOUNT")).intValue();
 						                <option value="study"${param.items eq 'study' ? "selected" : ""}>교육/공부</option>
 						                <option value="meet"${param.items eq 'meet' ? "selected" : ""}>친목/모임</option>
 						                <option value="sport"${param.items eq 'sport' ? "selected" : ""}>스포츠/레저</option>
-						                <option value="it"${param.items eq 'it' ? "selected" : ""}>IT/컴퓨터</option>
+						                <option value="IT"${param.items eq 'IT' ? "selected" : ""}>IT/컴퓨터</option>
 						                <option value="job"${param.items eq 'job' ? "selected" : ""}>취업/자격증</option>
 									</select> 
 									<input type="submit" class= "btn" value="Search " />
