@@ -26,12 +26,13 @@ public class boardDTO {
 
 	
 
-	public boardDTO(int num, String title, String content, String user_ID, int viewCnt, String regDate) {
+	public boardDTO(int num, String title, String content, String user_ID, String category, int viewCnt, String regDate) {
 		super();
 		this.num = num;
 		this.title = title;
 		this.content = content;
 		this.user_ID = user_ID;
+		this.category = category;
 		this.viewCnt = viewCnt;
 		this.regDate = regDate;
 		

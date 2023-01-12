@@ -58,7 +58,7 @@ List<boardDTO> list = (List<boardDTO>) request.getAttribute("list");
 			<td class = "tdd"><a href="view.do?num=<%=dto.getNum()%>"><%=dto.getTitle()%></a></td>
 			<td><%=dto.getUser_ID()%></td>
 			<td><%=dto.getViewCnt()%></td>
-			<td><%=dto.getRegDateTime()%></td>
+			<td><%=dto.getRegDate()%></td>
 		</tr>
 		<%
 			}

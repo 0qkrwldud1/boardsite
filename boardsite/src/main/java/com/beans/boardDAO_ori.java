@@ -51,10 +51,11 @@ public class boardDAO_ori {
 				if (content == null)
 					content = "";
 				String user_ID = rs.getString("user_ID");
+				String category = rs.getString("category");
 				int viewCnt = rs.getInt("viewcnt");
-				LocalDateTime regDate = rs.getObject("regdate", LocalDateTime.class);
+				String regDate = rs.getString("regdate");
 	
-				boardDTO dto = new boardDTO(num, title, content, user_ID, viewCnt, regDate);
+				boardDTO dto = new boardDTO(num, title, content, user_ID, category,  viewCnt, regDate);
 				list.add(dto);
 
 			}

@@ -27,7 +27,7 @@ if (list == null || list.size() == 0) {
 	String content = dto.getContent();
 	String user_ID = dto.getUser_ID();
 	int viewCnt = dto.getViewCnt();
-	String regDate = dto.getRegDateTime();
+	String regDate = dto.getRegDate();
 	
 %>
 
