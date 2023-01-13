@@ -53,9 +53,9 @@
     </section>
     <h4>유저, 관리자 1:1 채팅 - 유저</h4>
   <!-- 채팅 영역 운영자, 유저간의 채팅 send-유저, 받는쪽이 관리자 
-   호스트네임 -> admin_broadsocket
-   관리자로 로그인하면 유저로부터온 채팅창을 확인할 수 있다.
-   채팅창이 아래쪽에 하나더 만들어지게-->
+   	호스트네임 -> admin_broadsocket
+  	로그인 했을때, 아이콘을 누르면 대화창이 뜨게 만든다
+   	문의같은 형식으로 채팅상담-->
   <form>
     <!-- 텍스트 박스에 채팅의 내용을 작성한다. -->
     <input id="textMessage" type="text" onkeydown="return enter()">
