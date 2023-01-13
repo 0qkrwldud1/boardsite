@@ -75,8 +75,8 @@ List<boardDTO> list = (List<boardDTO>) request.getAttribute("list");
 				<span>
 					<strong>ID</strong>
 				</span>
-				<span>
-					<input type="text" name="user_ID" value="<%=user_ID %>"/><br>
+				<span> <!-- ID는 수정x -->
+					<input type="text" name="user_ID" value="<%=user_ID %>" readOnly/><br>
 				</span>
 				</div>
 				<div class = "ti_list">
@@ -94,7 +94,11 @@ List<boardDTO> list = (List<boardDTO>) request.getAttribute("list");
 			<div class="filebox">
 			    <input class="upload-name" value="첨부파일" placeholder="filename">
 			   	<label for="file">Upload</label> 
-			    <input type="file" id="file" >
+			    <!-- <input type="file" id="file" > 원래거 -->
+			    <!-- 업데이트 시 파일 업로드 수정 -->
+			    <input type="file" id="uploads" value="파일 추가" onClick="addFile()"
+			    	name= "fileName" required = false />
+			    
 			    <input class = "up_btn" type="submit" value="Update"/>
 			    
 			    <script> $("#file").on('change',function(){
