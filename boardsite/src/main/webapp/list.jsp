@@ -169,7 +169,10 @@ int LISTCOUNT = ((Integer) request.getAttribute("LISTCOUNT")).intValue();
    
    			
    	<h4>유저 관리자 1:1 채팅 - 관리자</h4>
-   	<!-- 유저가 접속할 때마다 이 템플릿으로 채팅창을 생성한다. -->
+   	<!-- 유저가 접속할 때마다 이 템플릿으로 채팅창을 생성한다. 
+   	보내는 쪽이 관리자, 호스트네임 -> admin 
+   	로그인 했을때, 아이콘을 누르면 대화창이 뜨게 만든다
+   	문의같은 형식으로 채팅상담-->
   	
   	<div class="template" style="display:none">
 	    
